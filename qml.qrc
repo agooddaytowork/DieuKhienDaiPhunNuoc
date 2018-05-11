@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>AutoModePage.qml</file>
+        <file>SetupModePage.qml</file>
+        <file>SettinSpeed.qml</file>
+        <file>images/play.png</file>
+        <file>images/serverOffline.png</file>
+        <file>images/serverOnline.png</file>
+        <file>images/stop.png</file>
+        <file>images/fountainOffline.png</file>
+        <file>images/fountainOnline.png</file>
+        <file>images/addNew.png</file>
+        <file>images/icon.png</file>
+        <file>FountainRunningPage.qml</file>
+    </qresource>
+</RCC>
