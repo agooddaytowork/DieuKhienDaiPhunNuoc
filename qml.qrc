@@ -14,5 +14,6 @@
         <file>images/addNew.png</file>
         <file>images/icon.png</file>
         <file>FountainRunningPage.qml</file>
+        <file>images/speed.png</file>
     </qresource>
 </RCC>

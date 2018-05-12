@@ -243,7 +243,6 @@ Item {
                                                     {"fountainName": 2,
                                                         "fountainProgram":1,
                                                         "fountainEnable": false},
-
                                                     {"fountainName": 3,
                                                         "fountainProgram":1,
                                                         "fountainEnable": false},
