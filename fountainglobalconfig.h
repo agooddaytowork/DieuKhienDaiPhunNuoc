@@ -13,8 +13,8 @@
 QByteArray &operator<<(QByteArray &l, quint8 r);
 
 QByteArray &operator<<(QByteArray &l, quint16 r);
-
 QByteArray &operator<<(QByteArray &l, quint32 r);
+QByteArray &operator<<(QByteArray &l, QByteArray r);
 
 enum fountainBitBang
 {

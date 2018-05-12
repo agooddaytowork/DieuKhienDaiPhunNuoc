@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     fileio.cpp \
     fountainserial.cpp \
     fountainclient.cpp \
-    tcppackager.cpp
+    tcppackager.cpp \
+    fountainserialpackager.cpp
 
 RESOURCES += qml.qrc
 
@@ -42,7 +43,8 @@ HEADERS += \
     fountainserial.h \
     fountainglobalconfig.h \
     fountainclient.h \
-    tcppackager.h
+    tcppackager.h \
+    fountainserialpackager.h
 
 DISTFILES += \
     android/AndroidManifest.xml \

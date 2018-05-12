@@ -36,6 +36,10 @@ Item {
     {
         alignGrids()
     }
+    onHeightChanged:
+    {
+        alignGrids()
+    }
 
     function openFountainOperationDialog()
     {
