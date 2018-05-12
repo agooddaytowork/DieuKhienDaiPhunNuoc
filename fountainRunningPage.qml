@@ -1575,6 +1575,8 @@ Item {
             if(theTcpClient.isSVOnline)
             {
                 theTcpClient.sendProgram("motorTimeSaving", fountainSerialPackager.setMotorSavingTimeForElectricalBox(motorTimeSavingDialog.currentIndex, ca1OnHour,ca1OnMinute,ca1OFFHour,ca1FFMinute,ca2OnHour,ca2OnMinute,ca2OFFHour,ca2OFFMinute))
+                root.isPendingForReply = true
+                loadingDialog.open()
             }
         }
         onRejected:
