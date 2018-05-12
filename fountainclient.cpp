@@ -71,7 +71,7 @@ void fountainClient::readyReadHandler()
 
         if(theCommand == "fountainCurrentPlayingProgram")
         {
-
+            emit svReceivedCommand();
         }
         else if (theCommand == "fountainStatus") {
 

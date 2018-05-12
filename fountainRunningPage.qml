@@ -18,6 +18,16 @@ Item {
     property int listCacheBuffer: 0
     property bool isModelLoaded: false
 
+    Connections{
+        target: theTcpClient
+
+        onSvReceivedCommand:
+        {
+            loadingDialog.close()
+            successDialog.open()
+        }
+    }
+
     Component.onCompleted:
     {
         generateDefaultFountainModel()
@@ -27,7 +37,8 @@ Item {
         fountainBoxGridView.model = fountainprogram_IDModel.get(0).fountains
         operationDialogListView.model = fountainprogram_IDModel.get(0).fountains
         operationDialogCombobox.model =fountainprogram_IDModel
-        updateRTCDialogGridView.model= fountainprogram_IDModel
+        lightSavingDialogComboBox.model = fountainprogram_IDModel
+        motorTimeSavingDialog.model = fountainprogram_IDModel
         alignGrids()
         root.isModelLoaded = true
     }
@@ -50,6 +61,8 @@ Item {
 
     function openUpdateRTCDialog()
     {
+        updateRTCDialogGridView.model =0
+        updateRTCDialogGridView.model= fountainprogram_IDModel
         updateRTCDialog.open()
     }
 
@@ -770,6 +783,8 @@ Item {
             }
 
             Button {
+
+                id: resetButton
                 text: qsTr("Reset")
                 DialogButtonBox.buttonRole: DialogButtonBox.ResetRole
             }
@@ -836,12 +851,14 @@ Item {
                     {
                         programComboBox.enabled = false
                         repeatCombobox.enabled = false
+                        resetButton.visible = false
 
                     }
                     else
                     {
                         programComboBox.enabled = true
                         repeatCombobox.enabled = true
+                        resetButton.visible = true
                     }
                 }
             }
@@ -851,19 +868,69 @@ Item {
         {
 
             fountainControlDialog.close()
+            // write settings to programModel
+
+            var Box_ID = electricalBoxGridView.electricalBoxCellCurrentIndex
+            var FO_ID = fountainBoxGridView.fountainBoxCellCurrentIndex
+
+            if(FO_ID === 0x00)
+            {
+                FO_ID = 10
+            }
+            else
+            {
+                FO_ID = FO_ID -1
+            }
+
+
+
+            if(theTcpClient.isSVOnline)
+            { if(fountainControlSyncCombobox.currentText != "Không")
+                {
+                    theTcpClient.sendProgram("syncSingleFountain", fountainSerialPackager.setSyncModeForSingleFountainPerElectricalBox(Box_ID,FO_ID,fountainControlSyncCombobox.currentIndex-1))
+                }
+                else
+                {
+                    if(fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).fountains.get(fountainBoxGridView.fountainBoxCellCurrentIndex).sync !== -1)
+                    {
+                        theTcpClient.sendProgram("syncSingleFountain", fountainSerialPackager.setSyncModeForSingleFountainPerElectricalBox(Box_ID,FO_ID,0x10))
+                    }
+                    theTcpClient.sendProgram("controlFountain", fountainSerialPackager.runProgramOnFountainDirectly(Box_ID,FO_ID,programComboBox.currentIndex,repeatCombobox.currentIndex))
+                }
+
+                loadingDialog.open()
+            }
+            else
+            {
+
+                // SV is not online, open dialog here
+            }
+
+            fountainprogram_IDModel.get(Box_ID).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"program_ID", programComboBox.currentIndex)
+            fountainprogram_IDModel.get(Box_ID).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"repeat", repeatCombobox.currentIndex)
+            fountainprogram_IDModel.get(Box_ID).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"sync", fountainControlSyncCombobox.currentIndex-1)
+
+        }
+        onRejected:
+        {
+            fountainControlDialog.close()
+        }
+        onReset:
+        {
+            console.log("RESSET")
+            fountainControlDialog.close()
 
             // write settings to programModel
             fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"program_ID", programComboBox.currentIndex)
             fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"repeat", repeatCombobox.currentIndex)
             fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"sync", fountainControlSyncCombobox.currentIndex-1)
 
+            if(theTcpClient.isSVOnline)
+            {
+                theTcpClient.sendProgram("restartProgramOnFountain", fountainSerialPackager.restartProgramOnFountain(electricalBoxGridView.electricalBoxCellCurrentIndex,fountainBoxGridView.fountainBoxCellCurrentIndex,programComboBox.currentIndex,repeatCombobox.currentIndex))
+                loadingDialog.open()
+            }
 
-            loadingDialog.open()
-
-        }
-        onRejected:
-        {
-            fountainControlDialog.close()
         }
 
     }
@@ -903,6 +970,38 @@ Item {
         onRejected:
         {
             loadingDialog.close()
+        }
+    }
+
+    Dialog
+    {
+        id: successDialog
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 4
+        // parent: Overlay.overlay
+
+        focus: true
+        modal: true
+        title: "Thông báo "
+        closePolicy: Popup.NoAutoClose
+        standardButtons:Dialog.Ok
+
+
+        Column {
+            spacing: 40
+            width: parent.width
+
+            Label {
+
+                wrapMode: Label.Wrap
+                horizontalAlignment: Qt.AlignHCenter
+                text: "Cập nhật thành công !"
+            }
+        }
+
+        onAccepted:
+        {
+            successDialog.close()
         }
     }
 
@@ -1069,6 +1168,16 @@ Item {
         y: (parent.height - height) / 4
         // parent: Overlay.overlay
         property string currentTime: Qt.formatTime(new Date(),"HH:mm:ss")
+        property bool isFO1 : false
+        property bool isFO2 : false
+        property bool isFO3 : false
+        property bool isFO4 : false
+        property bool isFO5 : false
+        property bool isFO6 : false
+        property bool isFO7 : false
+        property bool isFO8 : false
+
+
         focus: true
         modal: true
         title: "Cập nhật thời gian thực cho tủ điện "
@@ -1090,6 +1199,83 @@ Item {
 
         onAccepted:
         {
+            if(theTcpClient.isSVOnline)
+            {
+                var hour = parseInt(Qt.formatTime(new Date(),"HH"))
+                var minute = parseInt(Qt.formatTime(new Date(),"mm"))
+                var second = parseInt(Qt.formatTime(new Date(),"ss"))
+
+                if(isFO1)
+                {
+                    hour = parseInt(Qt.formatTime(new Date(),"HH"))
+                    minute = parseInt(Qt.formatTime(new Date(),"mm"))
+                    second = parseInt(Qt.formatTime(new Date(),"ss"))
+
+                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x00,hour,minute,second))
+                }
+                if(isFO2)
+                {
+                    hour = parseInt(Qt.formatTime(new Date(),"HH"))
+                    minute = parseInt(Qt.formatTime(new Date(),"mm"))
+                    second = parseInt(Qt.formatTime(new Date(),"ss"))
+
+                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x01,hour,minute,second))
+                }
+                if(isFO3)
+                {
+                    hour = parseInt(Qt.formatTime(new Date(),"HH"))
+                    minute = parseInt(Qt.formatTime(new Date(),"mm"))
+                    second = parseInt(Qt.formatTime(new Date(),"ss"))
+
+                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x02,hour,minute,second))
+                }
+                if(isFO4)
+                {
+                    hour = parseInt(Qt.formatTime(new Date(),"HH"))
+                    minute = parseInt(Qt.formatTime(new Date(),"mm"))
+                    second = parseInt(Qt.formatTime(new Date(),"ss"))
+
+                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x03,hour,minute,second))
+                }
+                if(isFO5)
+                {
+                    hour = parseInt(Qt.formatTime(new Date(),"HH"))
+                    minute = parseInt(Qt.formatTime(new Date(),"mm"))
+                    second = parseInt(Qt.formatTime(new Date(),"ss"))
+
+                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x04,hour,minute,second))
+                }
+                if(isFO6)
+                {
+                    hour = parseInt(Qt.formatTime(new Date(),"HH"))
+                    minute = parseInt(Qt.formatTime(new Date(),"mm"))
+                    second = parseInt(Qt.formatTime(new Date(),"ss"))
+
+                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x05,hour,minute,second))
+                }
+                if(isFO7)
+                {
+                    hour = parseInt(Qt.formatTime(new Date(),"HH"))
+                    minute = parseInt(Qt.formatTime(new Date(),"mm"))
+                    second = parseInt(Qt.formatTime(new Date(),"ss"))
+
+                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x06,hour,minute,second))
+                }
+                if(isFO8)
+                {
+                    hour = parseInt(Qt.formatTime(new Date(),"HH"))
+                    minute = parseInt(Qt.formatTime(new Date(),"mm"))
+                    second = parseInt(Qt.formatTime(new Date(),"ss"))
+
+                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x07,hour,minute,second))
+                }
+
+                 loadingDialog.open()
+            }
+
+            isFO1 = false; isFO2 =false; isFO3 = false; isFO4 =false; isFO5 = false; isFO6 =false; isFO7 = false; isFO8 = false
+
+
 
         }
         onRejected:
@@ -1168,6 +1354,38 @@ Item {
                         onClicked:
                         {
                             updateRTCelectricalBoxDelegate.cellSelected = !updateRTCelectricalBoxDelegate.cellSelected
+                            if(box_ID == 0)
+                            {
+                                updateRTCDialog.isFO1 = updateRTCelectricalBoxDelegate.cellSelected
+                            }
+                            else if(box_ID == 1)
+                            {
+                                updateRTCDialog.isFO2 = updateRTCelectricalBoxDelegate.cellSelected
+                            }
+                            else if(box_ID == 2)
+                            {
+                                updateRTCDialog.isFO3 = updateRTCelectricalBoxDelegate.cellSelected
+                            }
+                            else if(box_ID == 3)
+                            {
+                                updateRTCDialog.isFO4 = updateRTCelectricalBoxDelegate.cellSelected
+                            }
+                            else if(box_ID == 4)
+                            {
+                                updateRTCDialog.isFO5 = updateRTCelectricalBoxDelegate.cellSelected
+                            }
+                            else if(box_ID == 5)
+                            {
+                                updateRTCDialog.isFO6 = updateRTCelectricalBoxDelegate.cellSelected
+                            }
+                            else if(box_ID == 6)
+                            {
+                                updateRTCDialog.isFO7 = updateRTCelectricalBoxDelegate.cellSelected
+                            }
+                            else if(box_ID == 7)
+                            {
+                                updateRTCDialog.isFO8 = updateRTCelectricalBoxDelegate.cellSelected
+                            }
 
                         }
                     }
@@ -1204,7 +1422,12 @@ Item {
 
         onAccepted:
         {
+            if(theTcpClient.isSVOnline)
+            {
+               theTcpClient.sendProgram("LightSavingTimer", fountainSerialPackager.setLightSavingTimeForElctricalbox(lightSavingDialogComboBox.currentIndex,lightSavingOnHourComboBox.currentIndex,lightSavingOnMinuteComboBox.currentIndex,lightSavingOffHourComboBox.currentIndex,lightSavingOffMinuteComboBox.currentIndex))
 
+                loadingDialog.open()
+            }
         }
         onRejected:
         {
@@ -1215,7 +1438,13 @@ Item {
         Column {
             spacing: 10
             width: 400
+            ComboBox
+            {
+                id: lightSavingDialogComboBox
+                model: 0
+                textRole: "box_Name"
 
+            }
 
             Text {
 
@@ -1230,6 +1459,7 @@ Item {
 
                 ComboBox
                 {
+                    id: lightSavingOnHourComboBox
                     model: 24
                 }
                 Text {
@@ -1242,6 +1472,7 @@ Item {
 
                 ComboBox
                 {
+                    id: lightSavingOnMinuteComboBox
                     model: 60
                 }
                 Text {
@@ -1265,6 +1496,7 @@ Item {
 
                 ComboBox
                 {
+                    id: lightSavingOffHourComboBox
                     model: 24
                 }
                 Text {
@@ -1277,6 +1509,7 @@ Item {
 
                 ComboBox
                 {
+                    id: lightSavingOffMinuteComboBox
                     model: 60
                 }
                 Text {
@@ -1303,6 +1536,15 @@ Item {
         closePolicy: Popup.NoAutoClose
         //        standardButtons:Dialog.Cancel
 
+        property bool isCa1: true
+        property int  ca1OnHour: 0
+        property int  ca1OnMinute: 0
+        property int  ca2OnHour: 0
+        property int  ca2OnMinute: 0
+        property int  ca1OFFHour: 0
+        property int  ca1FFMinute: 0
+        property int  ca2OFFHour: 0
+        property int  ca2OFFMinute: 0
         footer: DialogButtonBox{
 
             Button {
@@ -1318,7 +1560,10 @@ Item {
 
         onAccepted:
         {
-
+            if(theTcpClient.isSVOnline)
+            {
+                theTcpClient.sendProgram("motorTimeSaving", fountainSerialPackager.setMotorSavingTimeForElectricalBox(motorTimeSavingDialog.currentIndex, ca1OnHour,ca1OnMinute,ca1OFFHour,ca1FFMinute,ca2OnHour,ca2OnMinute,ca2OFFHour,ca2OFFMinute))
+            }
         }
         onRejected:
         {
@@ -1330,6 +1575,14 @@ Item {
             spacing: 10
             width: 400
 
+            ComboBox
+            {
+                id: motorTimeSavingDialog
+                model: 0
+                textRole: "box_Name"
+
+            }
+
             TabBar {
                 id: tabBar
                 currentIndex: 0
@@ -1338,9 +1591,30 @@ Item {
 
                 TabButton {
                     text: "Ca 1"
+
+                    onPressed: {
+                        updateMotorTimeSavingDialog.isCa1 = true
+
+                        motorOnHourComboBox.currentIndex = updateMotorTimeSavingDialog.ca1OnHour
+                        motorOnMinuteComboBox.currentIndex = updateMotorTimeSavingDialog.ca1OnMinute
+
+                        motorOffHourComboBox.currentIndex = updateMotorTimeSavingDialog.ca1OFFHour
+                        motorOffMinuteComboBox.currentIndex = updateMotorTimeSavingDialog.ca1FFMinute
+
+                    }
                 }
                 TabButton {
                     text: "Ca 2"
+
+                    onPressed: {
+                        updateMotorTimeSavingDialog.isCa1 = false
+
+                        motorOnHourComboBox.currentIndex = updateMotorTimeSavingDialog.ca2OnHour
+                        motorOnMinuteComboBox.currentIndex = updateMotorTimeSavingDialog.ca2OnMinute
+
+                        motorOffHourComboBox.currentIndex = updateMotorTimeSavingDialog.ca2OFFHour
+                        motorOffMinuteComboBox.currentIndex = updateMotorTimeSavingDialog.ca2OFFMinute
+                    }
                 }
             }
             Text {
@@ -1356,7 +1630,19 @@ Item {
 
                 ComboBox
                 {
+                    id: motorOnHourComboBox
                     model: 24
+                    onCurrentIndexChanged:
+                    {
+                        if (updateMotorTimeSavingDialog.isCa1)
+                        {
+                            updateMotorTimeSavingDialog.ca1OnHour = currentIndex
+                        }
+                        else
+                        {
+                            updateMotorTimeSavingDialog.ca2OnHour = currentIndex
+                        }
+                    }
                 }
                 Text {
 
@@ -1368,9 +1654,22 @@ Item {
 
                 ComboBox
                 {
+                    id: motorOnMinuteComboBox
                     model: 60
+                    onCurrentIndexChanged:
+                    {
+                        if (updateMotorTimeSavingDialog.isCa1)
+                        {
+                            updateMotorTimeSavingDialog.ca1OnMinute = currentIndex
+                        }
+                        else
+                        {
+                            updateMotorTimeSavingDialog.ca2OnMinute = currentIndex
+                        }
+                    }
                 }
                 Text {
+
 
                     text: qsTr("phút")
                     font.pixelSize: 16
@@ -1391,7 +1690,19 @@ Item {
 
                 ComboBox
                 {
+                    id: motorOffHourComboBox
                     model: 24
+                    onCurrentIndexChanged:
+                    {
+                        if (updateMotorTimeSavingDialog.isCa1)
+                        {
+                            updateMotorTimeSavingDialog.ca1OFFHour = currentIndex
+                        }
+                        else
+                        {
+                            updateMotorTimeSavingDialog.ca2OFFHour = currentIndex
+                        }
+                    }
                 }
                 Text {
 
@@ -1403,7 +1714,20 @@ Item {
 
                 ComboBox
                 {
+                    id: motorOffMinuteComboBox
                     model: 60
+
+                    onCurrentIndexChanged:
+                    {
+                        if (updateMotorTimeSavingDialog.isCa1)
+                        {
+                            updateMotorTimeSavingDialog.ca1FFMinute = currentIndex
+                        }
+                        else
+                        {
+                            updateMotorTimeSavingDialog.ca2OFFMinute = currentIndex
+                        }
+                    }
                 }
                 Text {
 

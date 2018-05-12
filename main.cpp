@@ -29,20 +29,13 @@ int main(int argc, char *argv[])
     fountainSerial fountainProgramSerializer;
     fountainClient aClient;
 
-    fountainSerialPackager aFountainSerialPackger;
-
-    QByteArray test;
-
-    test.append(aFountainSerialPackger.runProgramOnFountainDirectly(0x01,0x00,20,99));
-    test.clear();
-    test.append(aFountainSerialPackger.restartProgramOnFountain(0x01,0x00,20));
-    test.clear();
-    test.append(aFountainSerialPackger.setRTCTimeForElectricalBox(0x00,15,9,50));
+    fountainSerialPackager aFountainSerialPackager;
 
       QQmlContext *thisContext = engine.rootContext();
     thisContext->setContextProperty("appIoManager", &appIoManager);
     thisContext->setContextProperty("dataIoManager", &dataIoManager);
     thisContext->setContextProperty("fountainProgramSerializer", &fountainProgramSerializer);
+    thisContext->setContextProperty("fountainSerialPackager", &aFountainSerialPackager);
     thisContext->setContextProperty("theTcpClient", &aClient);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

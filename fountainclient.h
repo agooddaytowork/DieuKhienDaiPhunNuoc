@@ -55,6 +55,7 @@ signals:
     void needToReQuestPermission();
     void currentControllingIDDisconnecting();
     void sentDisconnectingNotification();
+    void svReceivedCommand();
 private slots:
     void readyReadHandler();
 

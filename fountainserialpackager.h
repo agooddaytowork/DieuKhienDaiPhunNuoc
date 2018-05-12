@@ -56,6 +56,7 @@ public:
     Q_INVOKABLE QByteArray setMotorSavingTimeForElectricalBox(const quint8 &Box_ID, const quint8 &Onhour1, const quint8 &Onminute1, const quint8 &OffHour1, const quint8 &OffMinute1
                                                               , const quint8 &Onhour2, const quint8 &Onminute2, const quint8 &OffHour2, const quint8 &OffMinute2);
     Q_INVOKABLE QByteArray setSyncModeForFountainsPerElectricalBox(const quint8 & Box_ID, const QByteArray &syncMode);
+    Q_INVOKABLE QByteArray setSyncModeForSingleFountainPerElectricalBox(const quint8 &Box_ID, const quint8 &FO_ID, const quint8 &syncFountain);
     Q_INVOKABLE QByteArray setOperationModeFountainsPerElectricalBOx(const quint8 & Box_ID, const QByteArray &operationMode);
     Q_INVOKABLE QByteArray setSpeedSingleProgramPerFountain(const quint8 &Box_ID, const quint8 &FO_ID, const quint8 &Program_ID, const quint8 &speed);
     Q_INVOKABLE QByteArray setSpeedAllProgramsPerFountain(const quint8 &Box_ID, const quint8 &FO_ID, const QByteArray &speeds);
