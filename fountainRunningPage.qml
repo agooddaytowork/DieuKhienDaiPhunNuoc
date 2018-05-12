@@ -18,13 +18,22 @@ Item {
     property int listCacheBuffer: 0
     property bool isModelLoaded: false
 
+    property bool isPendingForReply: false
+
     Connections{
         target: theTcpClient
 
         onSvReceivedCommand:
         {
-            loadingDialog.close()
-            successDialog.open()
+            if(isPendingForReply)
+            {
+                loadingDialog.close()
+                successDialog.open()
+            }
+
+            isPendingForReply = false
+
+
         }
     }
 
@@ -898,6 +907,7 @@ Item {
                     theTcpClient.sendProgram("controlFountain", fountainSerialPackager.runProgramOnFountainDirectly(Box_ID,FO_ID,programComboBox.currentIndex,repeatCombobox.currentIndex))
                 }
 
+                root.isPendingForReply = true
                 loadingDialog.open()
             }
             else
@@ -928,6 +938,7 @@ Item {
             if(theTcpClient.isSVOnline)
             {
                 theTcpClient.sendProgram("restartProgramOnFountain", fountainSerialPackager.restartProgramOnFountain(electricalBoxGridView.electricalBoxCellCurrentIndex,fountainBoxGridView.fountainBoxCellCurrentIndex,programComboBox.currentIndex,repeatCombobox.currentIndex))
+                root.isPendingForReply = true
                 loadingDialog.open()
             }
 
@@ -1270,7 +1281,8 @@ Item {
                     theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x07,hour,minute,second))
                 }
 
-                 loadingDialog.open()
+                root.isPendingForReply = true
+                loadingDialog.open()
             }
 
             isFO1 = false; isFO2 =false; isFO3 = false; isFO4 =false; isFO5 = false; isFO6 =false; isFO7 = false; isFO8 = false
@@ -1424,8 +1436,8 @@ Item {
         {
             if(theTcpClient.isSVOnline)
             {
-               theTcpClient.sendProgram("LightSavingTimer", fountainSerialPackager.setLightSavingTimeForElctricalbox(lightSavingDialogComboBox.currentIndex,lightSavingOnHourComboBox.currentIndex,lightSavingOnMinuteComboBox.currentIndex,lightSavingOffHourComboBox.currentIndex,lightSavingOffMinuteComboBox.currentIndex))
-
+                theTcpClient.sendProgram("LightSavingTimer", fountainSerialPackager.setLightSavingTimeForElctricalbox(lightSavingDialogComboBox.currentIndex,lightSavingOnHourComboBox.currentIndex,lightSavingOnMinuteComboBox.currentIndex,lightSavingOffHourComboBox.currentIndex,lightSavingOffMinuteComboBox.currentIndex))
+                root.isPendingForReply = true
                 loadingDialog.open()
             }
         }
