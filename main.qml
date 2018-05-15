@@ -147,7 +147,7 @@ ApplicationWindow {
                         text: "Chỉnh tốc độ chương trình"
                         font.pixelSize: 16
                         onTriggered:{
-
+                            stackView.currentItem.toggleSpeedSetupDialog()
                         }
                     }
                 }
@@ -221,6 +221,25 @@ ApplicationWindow {
                 }
 
             }
+            Rectangle
+            {
+                width: 40
+                height: toolButton.implicitHeight
+                //                anchors.right: parent.right
+                //                anchors.rightMargin: 40 + toolButton.implicitWidth
+                anchors.verticalCenter: parent.verticalCenter
+                color: "transparent"
+
+                id: speedStatusIcon
+                Image
+                {
+                    anchors.centerIn: parent
+                    source: "images/speed.png"
+                    scale: 0.6
+                }
+                visible: initSetupModePage.setSpeedMode
+
+            }
 
         }
 
@@ -290,7 +309,7 @@ ApplicationWindow {
 
         focus: true
         modal: true
-        title: "Máy chủ"
+        title: "Kết nối tới đài phun nước"
         footer: DialogButtonBox{
 
             Button {
@@ -308,17 +327,17 @@ ApplicationWindow {
 
 
 
-//        {
-//            if(!theTcpClient.isSVOnline)
-//            {
-//                Dialog.Ok | Dialog.Cancel
-//            }
+        //        {
+        //            if(!theTcpClient.isSVOnline)
+        //            {
+        //                Dialog.Ok | Dialog.Cancel
+        //            }
 
-//            else
-//            {
-//                Dialog.Cancel
-//            }
-//        }
+        //            else
+        //            {
+        //                Dialog.Cancel
+        //            }
+        //        }
 
 
 
@@ -330,7 +349,7 @@ ApplicationWindow {
 
             Button{
                 id: disconnectToServerButton
-                text: "Ngắt kết nối tới máy chủ"
+                text: "Ngắt kết nối tới đài phun nước"
 
                 visible: theTcpClient.isSVOnline
                 onClicked: {
@@ -340,14 +359,14 @@ ApplicationWindow {
                 }
 
             }
-            TextField {
-                id: svAddressDialogTextField
-                visible: !theTcpClient.isSVOnline
-                focus: true
-                placeholderText:"Địa chỉ..."
-                Layout.fillWidth: true
-                text: appSetting.hostAddress
-            }
+            //            TextField {
+            //                id: svAddressDialogTextField
+            //                visible: !theTcpClient.isSVOnline
+            //                focus: true
+            //                placeholderText:"Địa chỉ..."
+            //                Layout.fillWidth: true
+            //                text: appSetting.hostAddress
+            //            }
 
         }
 
@@ -355,8 +374,10 @@ ApplicationWindow {
         {
             if(!theTcpClient.isSVOnline)
             {
-                appSetting.hostAddress = svAddressDialogTextField.text
-                theTcpClient.connect(svAddressDialogTextField.text, 8080)
+                appSetting.hostAddress = "thanhduc66.com"
+                //                theTcpClient.connect(svAddressDialogTextField.text, 8080)
+
+                theTcpClient.connect("thanhduc66.com",8080)
             }
 
         }
@@ -495,7 +516,6 @@ ApplicationWindow {
         }
 
     }
-
     Settings
     {
         id: appSetting
@@ -503,7 +523,5 @@ ApplicationWindow {
         property bool mainController: false
 
     }
-
-
 
 }

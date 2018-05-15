@@ -21,19 +21,13 @@ int main(int argc, char *argv[])
     app.setApplicationName("Fountain Controller");
     QQmlApplicationEngine engine;
 
-    FileIO appIoManager("App");
-    FileIO dataIoManager("Data");
-
-//    qDebug()<< QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-
     fountainSerial fountainProgramSerializer;
     fountainClient aClient;
 
     fountainSerialPackager aFountainSerialPackager;
 
       QQmlContext *thisContext = engine.rootContext();
-    thisContext->setContextProperty("appIoManager", &appIoManager);
-    thisContext->setContextProperty("dataIoManager", &dataIoManager);
+
     thisContext->setContextProperty("fountainProgramSerializer", &fountainProgramSerializer);
     thisContext->setContextProperty("fountainSerialPackager", &aFountainSerialPackager);
     thisContext->setContextProperty("theTcpClient", &aClient);
