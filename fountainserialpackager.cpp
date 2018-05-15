@@ -3,6 +3,10 @@
 fountainSerialPackager::fountainSerialPackager(QObject * parent): QObject(parent), m_OperationCode(0x00), m_PackageLength(0x00), m_BoxID(0x00), m_FOID(0x00), m_ProgramID(0x00),m_Repeat(0x00)
 {
     m_Data.clear();
+    for(int i = 0; i < 9; i++)
+    {
+        m_fountains.append(0x11);
+    }
 }
 
 fountainSerialPackager &fountainSerialPackager::setOpcode(const quint8 &opcode)
@@ -134,16 +138,18 @@ QByteArray fountainSerialPackager::setMotorSavingTimeForElectricalBox(const quin
 
 }
 
-QByteArray fountainSerialPackager::setSyncModeForFountainsPerElectricalBox(const quint8 &Box_ID, const QByteArray &syncMode)
+QByteArray fountainSerialPackager::setSyncModeForFountainsPerElectricalBox(const quint8 &Box_ID)
 {
     fountainSerialPackager aPackage;
-    return aPackage.setOpcode(m_OpCode_setSyncModeOfallFountainsPerElectricalBox).setBoxID(Box_ID).setData(syncMode).setPackageLength().generateSerialPackage();
+    return aPackage.setOpcode(m_OpCode_setSyncModeOfallFountainsPerElectricalBox).setBoxID(Box_ID).setData(m_fountains).setPackageLength().generateSerialPackage();
 }
 
-QByteArray fountainSerialPackager::setOperationModeFountainsPerElectricalBOx(const quint8 &Box_ID, const QByteArray &operationMode)
+QByteArray fountainSerialPackager::setOperationModeFountainsPerElectricalBOx(const quint8 &Box_ID)
 {
-    fountainSerialPackager aPackage;
-    return aPackage.setOpcode(m_OpCode_setOperationModeOfAllFountainPerElectricalBox).setBoxID(Box_ID).setData(operationMode).setPackageLength().generateSerialPackage();
+
+//    return  this->setOpcode(m_OpCode_setOperationModeOfAllFountainPerElectricalBox)->setBoxID(Box_ID)->setData(m_fountains)->setPackageLength()->generateSerialPackage();
+
+    return this->setOpcode(m_OpCode_setOperationModeOfAllFountainPerElectricalBox).setBoxID(Box_ID).setData(m_fountains).setPackageLength().generateSerialPackage();
 }
 
 QByteArray fountainSerialPackager::setSpeedSingleProgramPerFountain(const quint8 &Box_ID, const quint8 &FO_ID, const quint8 &Program_ID, const quint8 &speed)
@@ -152,11 +158,18 @@ QByteArray fountainSerialPackager::setSpeedSingleProgramPerFountain(const quint8
     return aPackage.setOpcode(m_OpCode_setSpeedSingleProgramSingleFountain).setBoxID(Box_ID).setFOID(FO_ID).setProgramID(Program_ID).setData(speed).setPackageLength().generateSerialPackage();
 }
 
-QByteArray fountainSerialPackager::setSpeedAllProgramsPerFountain(const quint8 &Box_ID, const quint8 &FO_ID, const QByteArray &speeds)
+QByteArray fountainSerialPackager::setSpeedAllProgramsPerFountain(const quint8 &Box_ID, const quint8 &FO_ID, const quint8 &speeds)
 {
     fountainSerialPackager aPackage;
 
-    return aPackage.setOpcode(m_OPCode_setSpeedAllProgramsSingleFountain).setBoxID(Box_ID).setFOID(FO_ID).setProgramID(0x00).setData(speeds).setPackageLength().generateSerialPackage();
+    QByteArray speeddata;
+
+    for (int i = 0; i < 100; i++)
+    {
+        speeddata.append(i);
+        speeddata.append(speeds);
+    }
+    return aPackage.setOpcode(m_OPCode_setSpeedAllProgramsSingleFountain).setBoxID(Box_ID).setFOID(FO_ID).setProgramID(0x00).setData(speeddata).setPackageLength().generateSerialPackage();
 }
 
 QByteArray fountainSerialPackager::setSyncModeForSingleFountainPerElectricalBox(const quint8 &Box_ID, const quint8 &FO_ID, const quint8 &syncFountain)
@@ -173,4 +186,21 @@ QByteArray fountainSerialPackager::setSyncModeForSingleFountainPerElectricalBox(
     syncModes[FO_ID] = syncFountain;
 
     return aPackage.setOpcode(m_OpCode_setSyncModeOfallFountainsPerElectricalBox).setBoxID(Box_ID).setData(syncModes).setPackageLength().generateSerialPackage();
+}
+
+fountainSerialPackager &fountainSerialPackager::setFountain(const quint8 &fountain, const quint8 &value)
+{
+ m_fountains[fountain] = value;
+
+ return *this;
+}
+
+void  fountainSerialPackager::clearData()
+{
+
+    m_Data.clear();
+    for(int i =0;i<9; i++)
+    {
+        m_fountains[i]=(0x11);
+    }
 }

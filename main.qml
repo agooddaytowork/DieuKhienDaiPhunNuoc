@@ -38,10 +38,7 @@ ApplicationWindow {
                 {
                     getPermissionDialog.open()
                 }
-
-
             }
-
 
         }
 

@@ -5,12 +5,14 @@
 #include "tcppackager.h"
 
 
-fountainClient::fountainClient(QObject *parent): QObject(parent), tcpSocket(new QTcpSocket(this)), m_Connected(false), m_IsFountainOnline(false), m_CurrentControllingId("")
+
+fountainClient::fountainClient(QObject *parent): QObject(parent), tcpSocket(new QTcpSocket(this)), m_Connected(false), m_IsFountainOnline(false), m_CurrentControllingId(""), m_Timer(new QTimer(this))
 {
     in.setDevice(tcpSocket);
     in.setVersion(QDataStream::Qt_5_8);
 
 
+    QObject::connect(m_Timer,&QTimer::timeout,this,&fountainClient::timeOutHandler);
     QObject::connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readyReadHandler()));
     QObject::connect(tcpSocket,&QTcpSocket::connected,[=](){
         setIsSVOnline(true);
@@ -227,3 +229,9 @@ void fountainClient::setIsFountainOnline(bool input)
         emit isFountainOnlineChanged(input);
     }
 }
+
+void fountainClient::timeOutHandler()
+{
+
+}
+

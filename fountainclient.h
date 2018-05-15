@@ -5,6 +5,8 @@
 #include <QDataStream>
 #include <QIODevice>
 #include <QtNetwork>
+#include <QTimer>
+
 #define fountainClientDebug (1)
 
 class fountainClient: public QObject
@@ -24,7 +26,10 @@ class fountainClient: public QObject
 
     bool m_Connected;
     bool m_IsFountainOnline;
+    bool m_IsTimeOut;
     QString m_CurrentControllingId;
+
+    QTimer *m_Timer;
 
 
 
@@ -58,6 +63,7 @@ signals:
     void svReceivedCommand();
 private slots:
     void readyReadHandler();
+    void timeOutHandler();
 
 
 };
