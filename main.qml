@@ -143,13 +143,13 @@ ApplicationWindow {
                         }
                     }
 
-                    MenuItem {
-                        text: "Chỉnh tốc độ chương trình"
-                        font.pixelSize: 16
-                        onTriggered:{
-                            stackView.currentItem.toggleSpeedSetupDialog()
-                        }
-                    }
+//                    MenuItem {
+//                        text: "Chỉnh tốc độ chương trình"
+//                        font.pixelSize: 16
+//                        onTriggered:{
+//                            stackView.currentItem.toggleSpeedSetupDialog()
+//                        }
+//                    }
                 }
             }
 
@@ -216,7 +216,7 @@ ApplicationWindow {
                     anchors.fill: parent
                     pressAndHoldInterval: 3000
                     onPressAndHold: {
-                        stackView.push(Qt.resolvedUrl("SettinSpeed.qml"))
+                        setAdvanceControlModeDialog.open()
                     }
                 }
 
@@ -228,17 +228,27 @@ ApplicationWindow {
                 //                anchors.right: parent.right
                 //                anchors.rightMargin: 40 + toolButton.implicitWidth
                 anchors.verticalCenter: parent.verticalCenter
-                color: "transparent"
+                color: speedModeMouseArea.pressed? "tomato" : "transparent"
 
                 id: speedStatusIcon
                 Image
                 {
                     anchors.centerIn: parent
-                    source: "images/speed.png"
+                    source: initSetupModePage.setSpeedMode ? "images/speedActivated.png":"images/speed.png"
                     scale: 0.6
                 }
-                visible: initSetupModePage.setSpeedMode
+                visible: appSetting.advanceMode
 
+                MouseArea
+                {
+                    id: speedModeMouseArea
+                    anchors.fill: parent
+
+                    onClicked:
+                    {
+                        initSetupModePage.setSpeedMode = !initSetupModePage.setSpeedMode
+                    }
+                }
             }
 
         }
@@ -429,7 +439,7 @@ ApplicationWindow {
 
     Dialog
     {
-        id: setMainControllerDialog
+        id: setAdvanceControlModeDialog
         x: (parent.width - width) / 2
         y: (parent.height - height) / 4
         // parent: Overlay.overlay
@@ -449,13 +459,13 @@ ApplicationWindow {
             {
                 text:
                 {
-                    if(appSetting.mainController)
+                    if(appSetting.advanceMode)
                     {
-                        "Unset this app as the main controller ?"
+                        "Bỏ chế độ advance"
                     }
                     else
                     {
-                        "Set this app as the main controller ?"
+                        "Cài chế độ advance"
                     }
                 }
             }
@@ -463,18 +473,11 @@ ApplicationWindow {
 
         onAccepted:
         {
-            if(appSetting.mainController)
-            {
-                appSetting.mainController = false
-            }
-            else
-            {
-                appSetting.mainController = true
-            }
+            appSetting.advanceMode = !appSetting.advanceMode
         }
         onRejected:
         {
-            setMainControllerDialog.close()
+            setAdvanceControlModeDialog.close()
         }
     }
 
@@ -521,6 +524,7 @@ ApplicationWindow {
         id: appSetting
         property string hostAddress: ""
         property bool mainController: false
+        property bool advanceMode: false
 
     }
 

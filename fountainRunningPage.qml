@@ -137,6 +137,7 @@ Item {
 
                                            {"box_ID": 0,
                                                "box_Name": "FO1",
+                                               "online": false,
                                                "fountains":
                                                    [
                                                    {"fO_ID": 10,
@@ -214,6 +215,7 @@ Item {
                                            },
                                            {"box_ID": 1,
                                                "box_Name": "FO2",
+                                               "online": false,
                                                "fountains":
                                                    [
                                                    {"fO_ID": 10,
@@ -291,6 +293,7 @@ Item {
                                            },
                                            {"box_ID": 2,
                                                "box_Name": "FO3",
+                                               "online": false,
                                                "fountains":
                                                    [
                                                    {"fO_ID": 10,
@@ -368,6 +371,7 @@ Item {
                                            },
                                            {"box_ID": 3,
                                                "box_Name": "FO4",
+                                               "online": false,
                                                "fountains":
                                                    [
                                                    {"fO_ID": 10,
@@ -445,6 +449,7 @@ Item {
                                            },
                                            {"box_ID": 4,
                                                "box_Name": "FO5",
+                                               "online": false,
                                                "fountains":
                                                    [
                                                    {"fO_ID": 10,
@@ -521,6 +526,7 @@ Item {
 
                                            },{"box_ID": 5,
                                                "box_Name": "FO6",
+                                               "online": false,
                                                "fountains":
                                                    [
                                                    {"fO_ID": 10,
@@ -597,6 +603,7 @@ Item {
 
                                            },{"box_ID": 6,
                                                "box_Name": "FO7",
+                                               "online": false,
                                                "fountains":
                                                    [
                                                    {"fO_ID": 10,
@@ -674,6 +681,7 @@ Item {
                                            },
                                            {"box_ID": 7,
                                                "box_Name": "Sân Khô",
+                                               "online": false,
                                                "fountains":
                                                    [
                                                    {"fO_ID": 10,
