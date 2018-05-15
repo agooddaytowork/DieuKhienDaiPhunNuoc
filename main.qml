@@ -54,6 +54,13 @@ ApplicationWindow {
         {
 
         }
+
+        onServerOffline:
+        {
+            stackView.currentItem.resetElectricalBoxStatus()
+        }
+
+
     }
 
     header: ToolBar {
@@ -140,13 +147,13 @@ ApplicationWindow {
                         }
                     }
 
-//                    MenuItem {
-//                        text: "Chỉnh tốc độ chương trình"
-//                        font.pixelSize: 16
-//                        onTriggered:{
-//                            stackView.currentItem.toggleSpeedSetupDialog()
-//                        }
-//                    }
+                    //                    MenuItem {
+                    //                        text: "Chỉnh tốc độ chương trình"
+                    //                        font.pixelSize: 16
+                    //                        onTriggered:{
+                    //                            stackView.currentItem.toggleSpeedSetupDialog()
+                    //                        }
+                    //                    }
                 }
             }
 

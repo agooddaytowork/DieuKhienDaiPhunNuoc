@@ -838,6 +838,7 @@ Item {
                     width: electricalBoxGridView.cellWidth
                     height: electricalBoxGridView.cellHeight
                     property int cellIndex: index
+                    enabled: online
 
                     Text {
                         id: electricalBoxText
@@ -878,14 +879,14 @@ Item {
                     Rectangle
                     {
                         id: electricalBoxOnlineStatus
-                        width: 10
-                        height: 10
+                        width: 14
+                        height: 14
                         anchors.right: parent.right
                         anchors.bottom: parent.bottom
                         anchors.rightMargin: 20
                         anchors.bottomMargin: 20
                         color: online ? "#56f442" : "grey"
-                        radius: 10
+                        radius: 14
                     }
                 }
             }

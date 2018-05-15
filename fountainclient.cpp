@@ -42,6 +42,7 @@ fountainClient::fountainClient(QObject *parent): QObject(parent), tcpSocket(new 
 
     QObject::connect(tcpSocket,&QTcpSocket::disconnected, [=](){
         setIsSVOnline(false);
+        emit serverOffline();
     });
 
     //    QObject::connect(tcpSocket,&QTcpSocket::error, [=](){

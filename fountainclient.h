@@ -66,6 +66,7 @@ signals:
     void svReceivedCommand();
 
     void fountainStatus();
+    void serverOffline();
 
 
 
