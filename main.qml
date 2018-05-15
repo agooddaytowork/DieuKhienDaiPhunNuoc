@@ -362,6 +362,7 @@ ApplicationWindow {
                 onClicked: {
                     theTcpClient.sendDiconnectNotification()
                     theTcpClient.disconnect()
+                    stackView.currentItem.resetElectricalBoxStatus()
 
                 }
 

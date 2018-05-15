@@ -21,6 +21,8 @@ Item {
     property bool isPendingForReply: false
     property bool setSpeedMode: false
 
+
+
     Connections{
         target: theTcpClient
 
@@ -33,6 +35,14 @@ Item {
             }
 
             isPendingForReply = false
+        }
+
+        onFountainStatus:
+        {
+            for(var i = 0; i < fountainprogram_IDModel.count; i++)
+            {
+                fountainprogram_IDModel.setProperty(i,"online",theTcpClient.getFountainStatus(i))
+            }
         }
     }
 
@@ -59,6 +69,15 @@ Item {
     {
         alignGrids()
     }
+
+    function resetElectricalBoxStatus()
+    {
+        for(var i = 0; i < fountainprogram_IDModel.count; i++)
+        {
+            fountainprogram_IDModel.setProperty(i,"online",false)
+        }
+    }
+
 
     function openFountainOperationDialog()
     {
@@ -855,6 +874,19 @@ Item {
                             fountainBoxGridView.model   = fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).fountains
                         }
                     }
+
+                    Rectangle
+                    {
+                        id: electricalBoxOnlineStatus
+                        width: 10
+                        height: 10
+                        anchors.right: parent.right
+                        anchors.bottom: parent.bottom
+                        anchors.rightMargin: 20
+                        anchors.bottomMargin: 20
+                        color: online ? "#56f442" : "grey"
+                        radius: 10
+                    }
                 }
             }
         }
@@ -921,6 +953,9 @@ Item {
                         anchors.centerIn: parent
                         color: "white"
                     }
+
+
+
                     //                    Text {
 
                     //                        text: {
@@ -942,14 +977,16 @@ Item {
                     //                            }
                     //                        }
 
-                    //                        font.pixelSize: 16
-                    //                        anchors.right: parent.right
-                    //                        anchors.bottom: parent.bottom
-                    //                        anchors.rightMargin: 20
-                    //                        anchors.bottomMargin: 20
-                    //                        color: "white"
-                    //                        visible: fO_ID === 10 ? false : true
-                    //                    }
+//                                            font.pixelSize: 16
+//                                            anchors.right: parent.right
+//                                            anchors.bottom: parent.bottom
+//                                            anchors.rightMargin: 20
+//                                            anchors.bottomMargin: 20
+//                                            color: "white"
+//                                            visible: fO_ID === 10 ? false : true
+//                                        }
+
+
                     background: Rectangle{
                         id: fountainBoxDelegateBackground
                         color:

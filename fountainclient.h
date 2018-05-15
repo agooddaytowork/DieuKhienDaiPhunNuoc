@@ -30,6 +30,7 @@ class fountainClient: public QObject
     QString m_CurrentControllingId;
 
     QTimer *m_Timer;
+    QHash<int, bool> m_fountainStatusHash;
 
 
 
@@ -53,6 +54,8 @@ public:
 
     bool isFountainOnline() const;
     void setIsFountainOnline(bool input);
+    void setFountainStatus(const int &id, const bool &status);
+    Q_INVOKABLE bool getFountainStatus(const int &id);
 
 signals:
     void isSVOnlineChanged(bool);
@@ -61,6 +64,11 @@ signals:
     void currentControllingIDDisconnecting();
     void sentDisconnectingNotification();
     void svReceivedCommand();
+
+    void fountainStatus();
+
+
+
 private slots:
     void readyReadHandler();
     void timeOutHandler();

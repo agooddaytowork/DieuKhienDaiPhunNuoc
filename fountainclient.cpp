@@ -11,6 +11,10 @@ fountainClient::fountainClient(QObject *parent): QObject(parent), tcpSocket(new 
     in.setDevice(tcpSocket);
     in.setVersion(QDataStream::Qt_5_8);
 
+    for (int i = 0; i < 8;i++)
+    {
+        m_fountainStatusHash.insert(i, false);
+    }
 
     QObject::connect(m_Timer,&QTimer::timeout,this,&fountainClient::timeOutHandler);
     QObject::connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readyReadHandler()));
@@ -77,7 +81,8 @@ void fountainClient::readyReadHandler()
         }
         else if (theCommand == "fountainStatus") {
 
-            setIsFountainOnline(svReply["Data"].toBool());
+            setFountainStatus(svReply["fountainId"].toInt(),svReply["Data"].toBool());
+            emit fountainStatus();
         }
         else if(theCommand == "fountainResponse")
         {
@@ -233,5 +238,15 @@ void fountainClient::setIsFountainOnline(bool input)
 void fountainClient::timeOutHandler()
 {
 
+}
+
+bool fountainClient::getFountainStatus(const int &id)
+{
+    return m_fountainStatusHash.value(id, false);
+}
+
+void fountainClient::setFountainStatus(const int &id, const bool &status)
+{
+    m_fountainStatusHash.insert(id,status);
 }
 
