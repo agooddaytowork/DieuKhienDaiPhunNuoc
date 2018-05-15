@@ -144,71 +144,71 @@ Item {
                                                        "fO_Name": "Tất Cả Đài",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 0,
                                                        "fO_Name": "Đài 1",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 1,
                                                        "fO_Name": "Đài 2",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 2,
                                                        "fO_Name": "Đài 3",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 3,
                                                        "fO_Name": "Đài 4",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 4,
                                                        "fO_Name": "Đài 5",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 5,
                                                        "fO_Name": "Đài 6",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 6,
                                                        "fO_Name": "Đài 7",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 7,
                                                        "fO_Name": "Đài 8",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 8,
                                                        "fO_Name": "Đài 9",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    }
                                                ]
 
@@ -222,71 +222,71 @@ Item {
                                                        "fO_Name": "Tất Cả Đài",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 0,
                                                        "fO_Name": "Đài 1",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 1,
                                                        "fO_Name": "Đài 2",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 2,
                                                        "fO_Name": "Đài 3",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 3,
                                                        "fO_Name": "Đài 4",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 4,
                                                        "fO_Name": "Đài 5",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 5,
                                                        "fO_Name": "Đài 6",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 6,
                                                        "fO_Name": "Đài 7",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 7,
                                                        "fO_Name": "Đài 8",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 8,
                                                        "fO_Name": "Đài 9",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    }
                                                ]
 
@@ -300,71 +300,71 @@ Item {
                                                        "fO_Name": "Tất Cả Đài",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 0,
                                                        "fO_Name": "Đài 1",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 1,
                                                        "fO_Name": "Đài 2",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 2,
                                                        "fO_Name": "Đài 3",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 3,
                                                        "fO_Name": "Đài 4",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 4,
                                                        "fO_Name": "Đài 5",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 5,
                                                        "fO_Name": "Đài 6",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 6,
                                                        "fO_Name": "Đài 7",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 7,
                                                        "fO_Name": "Đài 8",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 8,
                                                        "fO_Name": "Đài 9",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    }
                                                ]
 
@@ -378,71 +378,71 @@ Item {
                                                        "fO_Name": "Tất Cả Đài",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 0,
                                                        "fO_Name": "Đài 1",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 1,
                                                        "fO_Name": "Đài 2",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 2,
                                                        "fO_Name": "Đài 3",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 3,
                                                        "fO_Name": "Đài 4",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 4,
                                                        "fO_Name": "Đài 5",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 5,
                                                        "fO_Name": "Đài 6",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 6,
                                                        "fO_Name": "Đài 7",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 7,
                                                        "fO_Name": "Đài 8",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 8,
                                                        "fO_Name": "Đài 9",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    }
 
                                                ]
@@ -456,71 +456,71 @@ Item {
                                                        "fO_Name": "Tất Cả Đài",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 0,
                                                        "fO_Name": "Đài 1",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 1,
                                                        "fO_Name": "Đài 2",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 2,
                                                        "fO_Name": "Đài 3",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 3,
                                                        "fO_Name": "Đài 4",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 4,
                                                        "fO_Name": "Đài 5",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 5,
                                                        "fO_Name": "Đài 6",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 6,
                                                        "fO_Name": "Đài 7",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 7,
                                                        "fO_Name": "Đài 8",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 8,
                                                        "fO_Name": "Đài 9",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    }
                                                ]
 
@@ -533,71 +533,71 @@ Item {
                                                        "fO_Name": "Tất Cả Đài",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 0,
                                                        "fO_Name": "Đài 1",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 1,
                                                        "fO_Name": "Đài 2",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 2,
                                                        "fO_Name": "Đài 3",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 3,
                                                        "fO_Name": "Đài 4",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 4,
                                                        "fO_Name": "Đài 5",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 5,
                                                        "fO_Name": "Đài 6",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 6,
                                                        "fO_Name": "Đài 7",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 7,
                                                        "fO_Name": "Đài 8",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 8,
                                                        "fO_Name": "Đài 9",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    }
                                                ]
 
@@ -610,71 +610,71 @@ Item {
                                                        "fO_Name": "Tất Cả Đài",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 0,
                                                        "fO_Name": "Đài 1",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 1,
                                                        "fO_Name": "Đài 2",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 2,
                                                        "fO_Name": "Đài 3",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 3,
                                                        "fO_Name": "Đài 4",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 4,
                                                        "fO_Name": "Đài 5",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 5,
                                                        "fO_Name": "Đài 6",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 6,
                                                        "fO_Name": "Đài 7",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 7,
                                                        "fO_Name": "Đài 8",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 8,
                                                        "fO_Name": "Đài 9",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    }
                                                ]
 
@@ -688,71 +688,71 @@ Item {
                                                        "fO_Name": "Tất Cả Đài",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 0,
                                                        "fO_Name": "Đài 1",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 1,
                                                        "fO_Name": "Đài 2",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 2,
                                                        "fO_Name": "Đài 3",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 3,
                                                        "fO_Name": "Đài 4",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 4,
                                                        "fO_Name": "Đài 5",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 5,
                                                        "fO_Name": "Đài 6",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 6,
                                                        "fO_Name": "Đài 7",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 7,
                                                        "fO_Name": "Đài 8",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    },
                                                    {"fO_ID": 8,
                                                        "fO_Name": "Đài 9",
                                                        "program_ID": 0,
                                                        "repeat":99,
-                                                       "sync": -1,
-                                                       "operationMode" : -1
+                                                       "sync": 0,
+                                                       "operationMode" : 3
                                                    }
                                                ]
                                            }
@@ -921,31 +921,35 @@ Item {
                         anchors.centerIn: parent
                         color: "white"
                     }
-                    Text {
+                    //                    Text {
 
-                        text: {
-                            if(operationMode == 1)
-                            {
-                                "ON"
-                            }
-                            else if(operationMode == 0)
-                            {
-                                "OFF"
-                            }
-                            else if(operationMode == 2)
-                            {
-                                "Timer"
-                            }
-                        }
+                    //                        text: {
 
-                        font.pixelSize: 16
-                        anchors.right: parent.right
-                        anchors.bottom: parent.bottom
-                        anchors.rightMargin: 20
-                        anchors.bottomMargin: 20
-                        color: "white"
-                        visible: fO_ID === 10 ? false : true
-                    }
+                    //                            if(root.isModelLoaded)
+                    //                            {
+                    //                                if(operationMode == 1)
+                    //                                {
+                    //                                    "ON"
+                    //                                }
+                    //                                else if(operationMode == 0)
+                    //                                {
+                    //                                    "OFF"
+                    //                                }
+                    //                                else if(operationMode == 2)
+                    //                                {
+                    //                                    "Timer"
+                    //                                }
+                    //                            }
+                    //                        }
+
+                    //                        font.pixelSize: 16
+                    //                        anchors.right: parent.right
+                    //                        anchors.bottom: parent.bottom
+                    //                        anchors.rightMargin: 20
+                    //                        anchors.bottomMargin: 20
+                    //                        color: "white"
+                    //                        visible: fO_ID === 10 ? false : true
+                    //                    }
                     background: Rectangle{
                         id: fountainBoxDelegateBackground
                         color:
@@ -982,7 +986,7 @@ Item {
                                 fountainControlDialog.titleString = fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).box_Name + "-" + fO_Name
                                 fountainControlDialog.currentProgramIndex = fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).fountains.get(fountainBoxGridView.fountainBoxCellCurrentIndex).program_ID
                                 fountainControlDialog.currentRepeatIndex = fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).fountains.get(fountainBoxGridView.fountainBoxCellCurrentIndex).repeat
-                                fountainControlDialog.currentSyncIndex = fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).fountains.get(fountainBoxGridView.fountainBoxCellCurrentIndex).sync + 1
+                                fountainControlDialog.currentSyncIndex = fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).fountains.get(fountainBoxGridView.fountainBoxCellCurrentIndex).sync
                                 fountainControlDialog.open()
                             }
                             else
@@ -1399,58 +1403,86 @@ Item {
 
 
 
-            for (var i = 1; i < operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.count; i++)
+            if(!operationTabBar.isSyncMode)
             {
-
-                fountainSerialPackager.setFountain((i-1),fountainOperationDialog.operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.get(i).operationMode)
-
-            }
-            if(theTcpClient.isSVOnline)
-            {
-
-                theTcpClient.sendProgram("updateOperationMode", fountainSerialPackager.setOperationModeFountainsPerElectricalBOx(operationDialogCombobox.currentIndex))
-                fountainSerialPackager.clearData()
-
-            }
-            for ( i = 1; i < operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.count; i++)
-            {
-
-                var syncMode = fountainOperationDialog.operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.get(i).sync
-
-                if(syncMode === -1)
+                var theOperationMode = 0
+                for (var i = 1; i < operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.count; i++)
                 {
-                    syncMode = 10
+
+                    theOperationMode = fountainOperationDialog.operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.get(i).operationMode
+
+                    if(theOperationMode !== 3)
+                    {
+                        fountainSerialPackager.setFountain((i-1),theOperationMode)
+                    }
+
                 }
+                if(theTcpClient.isSVOnline)
+                {
+                    theTcpClient.sendProgram("updateOperationMode", fountainSerialPackager.setOperationModeFountainsPerElectricalBOx(operationDialogCombobox.currentIndex))
+                    fountainSerialPackager.clearData()
 
-                fountainSerialPackager.setFountain((i-1),syncMode)
-
+                }
             }
-            if(theTcpClient.isSVOnline)
+            else
             {
 
-                theTcpClient.sendProgram("updateSyncMode", fountainSerialPackager.setSyncModeForFountainsPerElectricalBox(operationDialogCombobox.currentIndex))
-                fountainSerialPackager.clearData()
+                var theSyncMode = 0
+                for ( i = 1; i < operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.count; i++)
+                {
 
+                    theSyncMode = fountainOperationDialog.operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.get(i).sync - 1
+
+                    console.log(theSyncMode)
+                    if(theSyncMode !== -1)
+                    {
+
+                        fountainSerialPackager.setFountain((i-1),theSyncMode)
+                    }
+
+                }
+                if(theTcpClient.isSVOnline)
+                {
+
+                    theTcpClient.sendProgram("updateSyncMode", fountainSerialPackager.setSyncModeForFountainsPerElectricalBox(operationDialogCombobox.currentIndex))
+                    fountainSerialPackager.clearData()
+                }
             }
-
-
 
         }
         onRejected:
         {
 
-            for (var i = 1; i < operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.count; i++)
-            {
-
-                operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.setProperty(i,"operationMode", fountainOperationDialog.currentOperationModearray[i-1])
-            }
             fountainOperationDialog.close()
 
         }
 
         Column {
             spacing: 10
-            width: 400
+            width: 350
+            TabBar {
+                id: operationTabBar
+                currentIndex: 0
+                anchors.left: parent.left
+                anchors.leftMargin: parent.width /2 - width/2
+                property bool isSyncMode: false
+
+                TabButton {
+                    text: "Chế độ hoạt động"
+
+                    onPressed: {
+                        operationTabBar.isSyncMode = false
+
+                    }
+                }
+                TabButton {
+                    text: "Đồng bộ"
+
+                    onPressed: {
+                        operationTabBar.isSyncMode = true
+                    }
+                }
+            }
 
             ComboBox
             {
@@ -1477,6 +1509,7 @@ Item {
                 clip: true
 
 
+
                 delegate: Rectangle{
                     id: operationDialogDelegate
                     width: parent.width
@@ -1490,6 +1523,7 @@ Item {
 
                     Row
                     {
+
                         spacing: 10
                         anchors.fill: parent
                         Text {
@@ -1504,6 +1538,7 @@ Item {
                             color: "white"
                             font.pixelSize: 14
                             anchors.verticalCenter: parent.verticalCenter
+                            visible: !operationTabBar.isSyncMode
 
                         }
                         ComboBox
@@ -1511,7 +1546,8 @@ Item {
                             id: operationModeComboxbox
                             model: fountainOperationModel
                             anchors.verticalCenter: parent.verticalCenter
-                            width: 90
+                            width: 200
+                            visible: !operationTabBar.isSyncMode
 
                             onModelChanged:
                             {
@@ -1533,25 +1569,27 @@ Item {
                             color: "white"
                             font.pixelSize: 14
                             anchors.verticalCenter: parent.verticalCenter
+                            visible: operationTabBar.isSyncMode
 
                         }
                         ComboBox
                         {
                             id: operationSyncCombobox
                             model: fountainSyncModel
-                            width: 95
+                            width: 200
                             anchors.verticalCenter: parent.verticalCenter
+                            visible: operationTabBar.isSyncMode
 
                             onModelChanged:
                             {
-                                operationSyncCombobox.currentIndex = sync +1
+                                operationSyncCombobox.currentIndex = sync
                             }
 
                             onCurrentIndexChanged:
                             {
                                 if(root.isModelLoaded)
                                 {
-                                    fountainOperationDialog.operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.setProperty(fountainIndex,"sync",currentIndex - 1)
+                                    fountainOperationDialog.operationDialogListViewModel.get(operationDialogCombobox.currentIndex).fountains.setProperty(fountainIndex,"sync",currentIndex)
                                 }
                             }
 
@@ -2163,7 +2201,7 @@ Item {
 
     ListModel {
         id: fountainSyncModel
-        ListElement { text: "Không" }
+        ListElement { text: "Không Cập Nhật" }
         ListElement { text: "đài 1" }
         ListElement { text: "đài 2" }
         ListElement { text: "đài 3" }
@@ -2173,6 +2211,7 @@ Item {
         ListElement { text: "đài 7" }
         ListElement { text: "đài 8" }
         ListElement { text: "đài 9" }
+        ListElement { text: "chính nó" }
     }
     ListModel {
         id: fountainOperationModel
