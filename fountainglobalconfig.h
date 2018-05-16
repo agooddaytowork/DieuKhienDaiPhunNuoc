@@ -2,7 +2,7 @@
 #define FOUNTAINGLOBALCONFIG_H
 
 #endif // FOUNTAINGLOBALCONFIG_H
-#define fountainSerialDebug (1)
+#define fountainSerialDebug (0)
 
 
 

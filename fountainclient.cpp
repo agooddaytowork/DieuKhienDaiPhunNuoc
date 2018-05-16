@@ -129,7 +129,10 @@ void fountainClient::readyReadHandler()
 
     }
 
-    qDebug()<< "Reply from SV: " + result;
+#if fountainClientDebug
+                qDebug()<< "Reply from SV: " + result;
+#endif
+
 
 }
 

@@ -20,6 +20,7 @@ Item {
 
     property bool isPendingForReply: false
     property bool setSpeedMode: false
+    property int  operatingMode: 0
 
 
 
@@ -108,6 +109,7 @@ Item {
     {
         root.setSpeedMode = !root.setSpeedMode
     }
+
 
     function alignGrids()
     {
@@ -936,7 +938,8 @@ Item {
                     property int cellIndex: index
                     enabled:
                     {
-                        if( root.setSpeedMode && fO_Name =="Tất Cả Đài")
+
+                        if(root.operatingMode !== 0 && fO_Name =="Tất Cả Đài")
                         {
                             false
                         }
@@ -944,6 +947,15 @@ Item {
                         {
                             true
                         }
+
+//                        if( root.setSpeedMode && fO_Name =="Tất Cả Đài")
+//                        {
+//                            false
+//                        }
+//                        else
+//                        {
+//                            true
+//                        }
                     }
 
 
@@ -997,7 +1009,8 @@ Item {
                                 "tomato"
                             }
 
-                            else if(operationMode == 0 || operationMode == 2 || (root.setSpeedMode && fO_Name =="Tất Cả Đài"))
+//                            else if(operationMode == 0 || operationMode == 2 || (root.setSpeedMode && fO_Name =="Tất Cả Đài"))
+                            else if(operationMode == 0 || operationMode == 2 || (root.operatingMode !== 0 && fO_Name =="Tất Cả Đài"))
                             {
                                 "#3d3d3d"
                             }
@@ -1018,7 +1031,7 @@ Item {
 
                         onClicked:
                         {
-                            if(!root.setSpeedMode)
+                            if(root.operatingMode == 0)
                             {
                                 fountainBoxGridView.fountainBoxCellCurrentIndex= parent.cellIndex
                                 fountainControlDialog.titleString = fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).box_Name + "-" + fO_Name
@@ -1084,15 +1097,14 @@ Item {
 
             if(theTcpClient.isSVOnline)
             {
-                if(allProgramCheckBox.checked)
-                {
-                    theTcpClient.sendDiconnectNotification("updateSpeedAll",fountainSerialPackager.setSpeedAllProgramsPerFountain(Box_ID,FO_ID,speedComboBox.currentIndex))
-                }
-                else
+                if(root.operatingMode == 1)
                 {
                     theTcpClient.sendProgram("updateSpeed", fountainSerialPackager.setSpeedSingleProgramPerFountain(Box_ID,FO_ID,contronProgramComboBox.currentIndex,speedComboBox.currentIndex))
                 }
-
+                else if(root.operatingMode == 2)
+                {
+  theTcpClient.sendProgram("updateEffectProgram", fountainSerialPackager.setProgramEffectForSingleFountain(Box_ID,FO_ID,contronProgramComboBox.currentIndex,effectComboBox.currentIndex,speedComboBox.currentIndex,fountainSpeedControlRepeatComboBox.currentIndex))
+                }
             }
         }
 
@@ -1106,7 +1118,7 @@ Item {
             anchors.fill: parent
             width: 400
             height: 400
-            rows: 3
+            rows: 5
             columns: 2
             // horizontalItemAlignment: Grid.AlignHCenter
             verticalItemAlignment:  Grid.AlignVCenter
@@ -1129,6 +1141,24 @@ Item {
             }
             Text {
 
+                text: qsTr("Hiệu ứng: ")
+                color: "white"
+                font.pixelSize: 16
+                visible: root.operatingMode == 2 ? true: false
+
+
+            }
+            ComboBox
+            {
+                id: effectComboBox
+                model: 31
+                editable: true
+                inputMethodHints:  Qt.ImhPreferNumbers
+                visible: root.operatingMode == 2 ? true: false
+
+            }
+            Text {
+
                 text: qsTr("Tốc độ: ")
                 color: "white"
                 font.pixelSize: 16
@@ -1144,6 +1174,23 @@ Item {
             }
             Text {
 
+                text: qsTr("Lặp lại: ")
+                color: "white"
+                font.pixelSize: 16
+                 visible: root.operatingMode == 2 ? true: false
+
+            }
+            ComboBox
+            {
+                id: fountainSpeedControlRepeatComboBox
+                model: 100
+                editable: true
+                inputMethodHints:  Qt.ImhPreferNumbers
+                 visible: root.operatingMode == 2 ? true: false
+
+            }
+            Text {
+
                 text: qsTr("Tất cả chương trình? ? ")
                 color: "white"
                 font.pixelSize: 16
@@ -1155,8 +1202,6 @@ Item {
                 checked: false
 
                 visible: false
-
-
             }
 
 
@@ -1403,9 +1448,7 @@ Item {
         closePolicy: Popup.NoAutoClose
         //        standardButtons:Dialog.Cancel
 
-
         property ListModel operationDialogListViewModel: ListModel {}
-
 
 
         onOpened:
@@ -1475,7 +1518,12 @@ Item {
                     if(theSyncMode !== -1)
                     {
 
+                        if(theSyncMode == 9)
+                        {
+                            theSyncMode = 10
+                        }
                         fountainSerialPackager.setFountain((i-1),theSyncMode)
+
                     }
 
                 }
@@ -1500,13 +1548,14 @@ Item {
             width: 350
             TabBar {
                 id: operationTabBar
+                width: 250
                 currentIndex: 0
                 anchors.left: parent.left
                 anchors.leftMargin: parent.width /2 - width/2
                 property bool isSyncMode: false
 
                 TabButton {
-                    text: "Chế độ hoạt động"
+                    text: "Tắt/Bật/Timer"
 
                     onPressed: {
                         operationTabBar.isSyncMode = false

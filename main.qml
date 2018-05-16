@@ -78,9 +78,9 @@ ApplicationWindow {
             spacing: 10
             ToolButton {
                 id: toolButton
-                implicitHeight: 40
+                implicitHeight: 50
                 text:   ">>"
-                font.pixelSize: Qt.application.font.pixelSize * 1.6
+                font.pixelSize: Qt.application.font.pixelSize * 1.7
                 anchors.verticalCenter: parent.verticalCenter
 
                 onClicked: optionsMenu.open()
@@ -158,60 +158,60 @@ ApplicationWindow {
             }
 
 
+//            Rectangle
+//            {
+//                width: 40
+//                height: toolButton.implicitHeight
+//                //  anchors.right: parent.right
+//                //  anchors.rightMargin: 20
+//                anchors.verticalCenter: parent.verticalCenter
+//                color: serverStatusMouseArea.pressed? "tomato" : "transparent"
+
+//                id: serverStatusIcon
+//                radius: 5
+//                Image
+//                {
+//                    id: svStatusImage
+//                    anchors.centerIn: parent
+//                    source: theTcpClient.isSVOnline ? "images/serverOnline.png" : "images/serverOffline.png"
+//                    scale: 0.8
+
+//                }
+
+//                MouseArea
+//                {
+//                    id: serverStatusMouseArea
+//                    anchors.fill: parent
+
+//                    onClicked:
+//                    {
+//                        svAddresDialog.open()
+//                    }
+
+//                    pressAndHoldInterval: 3000
+//                    onPressAndHold:
+//                    {
+//                        setMainControllerDialog.open()
+//                    }
+//                }
+
+//            }
+
             Rectangle
             {
-                width: 40
-                height: toolButton.implicitHeight
-                //  anchors.right: parent.right
-                //  anchors.rightMargin: 20
-                anchors.verticalCenter: parent.verticalCenter
-                color: serverStatusMouseArea.pressed? "tomato" : "transparent"
-
-                id: serverStatusIcon
-                radius: 5
-                Image
-                {
-                    id: svStatusImage
-                    anchors.centerIn: parent
-                    source: theTcpClient.isSVOnline ? "images/serverOnline.png" : "images/serverOffline.png"
-                    scale: 0.8
-
-                }
-
-                MouseArea
-                {
-                    id: serverStatusMouseArea
-                    anchors.fill: parent
-
-                    onClicked:
-                    {
-                        svAddresDialog.open()
-                    }
-
-                    pressAndHoldInterval: 3000
-                    onPressAndHold:
-                    {
-                        setMainControllerDialog.open()
-                    }
-                }
-
-            }
-
-            Rectangle
-            {
-                width: 40
+                width: 50
                 height: toolButton.implicitHeight
                 //                anchors.right: parent.right
                 //                anchors.rightMargin: 40 + toolButton.implicitWidth
                 anchors.verticalCenter: parent.verticalCenter
-                color: "transparent"
+                color: fountainStatusIconMouseArea.pressed? "tomato" : "transparent"
 
                 id: fountainStatusIcon
                 Image
                 {
                     anchors.centerIn: parent
-                    source: theTcpClient.isFountainOnline? "images/fountainOnline.png" : "images/fountainOffline.png"
-                    scale: 0.6
+                    source: theTcpClient.isSVOnline? "images/fountainOnline.png" : "images/fountainOffline.png"
+                    scale: 0.7
                 }
 
                 MouseArea
@@ -222,23 +222,59 @@ ApplicationWindow {
                     onPressAndHold: {
                         setAdvanceControlModeDialog.open()
                     }
-                }
+                    onClicked:
+                    {
+                        svAddresDialog.open()
+                    }
 
+                }
             }
+
             Rectangle
             {
-                width: 40
+                width: 50
                 height: toolButton.implicitHeight
                 //                anchors.right: parent.right
                 //                anchors.rightMargin: 40 + toolButton.implicitWidth
                 anchors.verticalCenter: parent.verticalCenter
-                color: speedModeMouseArea.pressed? "tomato" : "transparent"
+                color: stackView.currentItem.operatingMode === 0 ? "tomato" : "transparent"
+
+                id: runDirectStatusIcon
+                Image
+                {
+                    anchors.centerIn: parent
+                    source: "images/runDirect.png"
+                    scale: 0.6
+                }
+                visible: appSetting.advanceMode
+
+                MouseArea
+                {
+                    id: runDirectMouseArea
+                    anchors.fill: parent
+
+                    onClicked:
+                    {
+                       stackView.currentItem.operatingMode = 0
+                    }
+                }
+            }
+
+            Rectangle
+            {
+                width: 50
+                height: toolButton.implicitHeight
+                //                anchors.right: parent.right
+                //                anchors.rightMargin: 40 + toolButton.implicitWidth
+                anchors.verticalCenter: parent.verticalCenter
+                color: stackView.currentItem.operatingMode === 1 ? "tomato" : "transparent"
 
                 id: speedStatusIcon
                 Image
                 {
                     anchors.centerIn: parent
-                    source: initSetupModePage.setSpeedMode ? "images/speedActivated.png":"images/speed.png"
+//                    source: initSetupModePage.setSpeedMode ? "images/speedActivated.png":"images/speed.png"
+                    source:"images/speed.png"
                     scale: 0.6
                 }
                 visible: appSetting.advanceMode
@@ -250,7 +286,39 @@ ApplicationWindow {
 
                     onClicked:
                     {
-                        initSetupModePage.setSpeedMode = !initSetupModePage.setSpeedMode
+//                        initSetupModePage.setSpeedMode = !initSetupModePage.setSpeedMode
+                          stackView.currentItem.operatingMode = 1
+                    }
+                }
+            }
+            Rectangle
+            {
+                width: 50
+                height: toolButton.implicitHeight
+                //                anchors.right: parent.right
+                //                anchors.rightMargin: 40 + toolButton.implicitWidth
+                anchors.verticalCenter: parent.verticalCenter
+                color: stackView.currentItem.operatingMode === 2 ? "tomato" : "transparent"
+
+                id: effectModeStausIcon
+                Image
+                {
+                    anchors.centerIn: parent
+//                    source: initSetupModePage.setSpeedMode ? "images/effect.png":"images/effectActivated.png"
+                     source: "images/effect.png"
+                    scale: 0.6
+                }
+                visible: appSetting.advanceMode
+
+                MouseArea
+                {
+                    id: effectModeMouseArea
+                    anchors.fill: parent
+
+                    onClicked:
+                    {
+//                        initSetupModePage.setSpeedMode = !initSetupModePage.setSpeedMode
+                        stackView.currentItem.operatingMode = 2
                     }
                 }
             }
@@ -451,7 +519,7 @@ ApplicationWindow {
 
         focus: true
         modal: true
-        title: "Main Controller"
+        title: "Chuyển sang advance mode"
         closePolicy: Popup.NoAutoClose
         standardButtons:Dialog.Yes | Dialog.No
 
@@ -479,6 +547,10 @@ ApplicationWindow {
         onAccepted:
         {
             appSetting.advanceMode = !appSetting.advanceMode
+            if(!appSetting.advanceMode)
+            {
+                stackView.currentItem.operatingMode = 0
+            }
         }
         onRejected:
         {

@@ -13,5 +13,8 @@
         <file>FountainRunningPage.qml</file>
         <file>images/speed.png</file>
         <file>images/speedActivated.png</file>
+        <file>images/effect.png</file>
+        <file>images/effectActivated.png</file>
+        <file>images/runDirect.png</file>
     </qresource>
 </RCC>
