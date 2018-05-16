@@ -4,7 +4,7 @@
 #include <QTextCodec>
 #include "tcppackager.h"
 
-#define readInterval 250
+#define readInterval 350
 
 
 
