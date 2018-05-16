@@ -4,6 +4,8 @@
 #include <QTextCodec>
 #include "tcppackager.h"
 
+#define readInterval 250
+
 
 
 fountainClient::fountainClient(QObject *parent): QObject(parent), tcpSocket(new QTcpSocket(this)), m_Connected(false), m_IsFountainOnline(false), m_CurrentControllingId(""), m_Timer(new QTimer(this))
@@ -38,16 +40,23 @@ fountainClient::fountainClient(QObject *parent): QObject(parent), tcpSocket(new 
 
         }
 
+        m_Timer->start(readInterval);
+
     });
 
     QObject::connect(tcpSocket,&QTcpSocket::disconnected, [=](){
         setIsSVOnline(false);
+        m_Timer->stop();
         emit serverOffline();
     });
 
     //    QObject::connect(tcpSocket,&QTcpSocket::error, [=](){
     //       setIsSVOnline(false);
     //    });
+
+
+    m_Timer->setInterval(2000);
+    m_Timer->setSingleShot(false);
 
 
 }
@@ -196,6 +205,7 @@ void fountainClient::setIsSVOnline(bool input)
 
 void fountainClient::disconnect()
 {
+    m_Timer->stop();
     tcpSocket->close();
 }
 
@@ -241,7 +251,7 @@ void fountainClient::setIsFountainOnline(bool input)
 
 void fountainClient::timeOutHandler()
 {
-
+    readyReadHandler();
 }
 
 bool fountainClient::getFountainStatus(const int &id)

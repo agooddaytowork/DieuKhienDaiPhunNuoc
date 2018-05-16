@@ -1483,7 +1483,6 @@ Item {
             fountainprogram_IDModel = operationDialogListViewModel
 
 
-
             if(!operationTabBar.isSyncMode)
             {
                 var theOperationMode = 0
@@ -1495,6 +1494,7 @@ Item {
                     if(theOperationMode !== 3)
                     {
                         fountainSerialPackager.setFountain((i-1),theOperationMode)
+
                     }
 
                 }
@@ -1534,6 +1534,8 @@ Item {
                     fountainSerialPackager.clearData()
                 }
             }
+
+
 
         }
         onRejected:

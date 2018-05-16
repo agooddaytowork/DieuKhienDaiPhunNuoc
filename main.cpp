@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
     fountainSerialPackager aFountainSerialPackager;
 
-      QQmlContext *thisContext = engine.rootContext();
+    QQmlContext *thisContext = engine.rootContext();
 
     thisContext->setContextProperty("fountainProgramSerializer", &fountainProgramSerializer);
     thisContext->setContextProperty("fountainSerialPackager", &aFountainSerialPackager);
