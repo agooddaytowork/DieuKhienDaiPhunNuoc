@@ -3,12 +3,13 @@
 #include <QJsonDocument>
 #include <QTextCodec>
 #include "tcppackager.h"
+#include "fountainserialpackager.h"
 
 #define readInterval 350
 
 
 
-fountainClient::fountainClient(QObject *parent): QObject(parent), tcpSocket(new QTcpSocket(this)), m_Connected(false), m_IsFountainOnline(false), m_CurrentControllingId(""), m_Timer(new QTimer(this))
+fountainClient::fountainClient(QObject *parent): QObject(parent), tcpSocket(new QTcpSocket(this)), m_Connected(false), m_IsFountainOnline(false), m_CurrentControllingId(""), m_Timer(new QTimer(this)), m_currentEffect(0x00), m_currentProgram(0x00), m_currentRepeat(0x00), m_currentSpeed(0x00)
 {
     in.setDevice(tcpSocket);
     in.setVersion(QDataStream::Qt_5_8);
@@ -96,6 +97,27 @@ void fountainClient::readyReadHandler()
         }
         else if(theCommand == "fountainResponse")
         {
+
+
+           fountainSerialPackager aPackage(QByteArray::fromHex(svReply["Data"].toString().toUtf8()));
+
+           if(aPackage.isPackageValid())
+           {
+                if(aPackage.getOpCode() == m_OpCode_updateCurrentStatusOfProgramSingleFountain)
+                {
+                    QByteArray tmpData = aPackage.getData();
+
+                    if(tmpData.count() >=4)
+                    {
+                        m_currentProgram = tmpData.at(0);
+                        m_currentEffect = tmpData.at(1);
+                        m_currentSpeed = tmpData.at(2);
+                        m_currentRepeat = tmpData.at(3);
+
+                        emit updateCurrentProgramSingleFountain();
+                    }
+                }
+           }
 
         }
         else if(theCommand == "Disconnecting")
@@ -262,5 +284,25 @@ bool fountainClient::getFountainStatus(const int &id)
 void fountainClient::setFountainStatus(const int &id, const bool &status)
 {
     m_fountainStatusHash.insert(id,status);
+}
+
+int fountainClient::getCurrentProgram()
+{
+    return m_currentProgram;
+}
+
+int fountainClient::getCurrentEffect()
+{
+    return m_currentEffect;
+}
+
+int fountainClient::getCurrentRepeat()
+{
+    return m_currentRepeat;
+}
+
+int fountainClient::getCurrentSpeed()
+{
+    return m_currentSpeed;
 }
 

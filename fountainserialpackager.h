@@ -14,6 +14,7 @@
 #define  m_OpCode_setProgramSingleFountain                          0x05
 #define  m_OPCode_setSpeedAllProgramsSingleFountain                 0x26
 #define  m_OpCode_setAllProgramsSingleFountain                      0x06
+#define  m_OpCode_updateCurrentStatusOfProgramSingleFountain        0x35
 #define  m_OpCode_FountainDeviceInternalHandShake                   0x00
 #define  m_Status_FountainDeviceHandShake                           0x01
 #define  m_Status_WifiOK                                            0x01
@@ -22,6 +23,7 @@
 #define  m_Status_RequestWifi                                       0x02
 #define  m_Status_RequestUserInputForWifi                           0x08
 #define  m_Status_ControlDevicesConnectedToPi                       0x05
+
 
 
 class fountainSerialPackager : public QObject
@@ -80,6 +82,7 @@ public:
     Q_INVOKABLE QByteArray setProgramEffectForSingleFountain(const quint8 &Box_ID, const quint8 &FO_ID, const quint8  &Program_ID, const quint8 &effectID, const quint8 &speed, const quint8 &repeat);
     Q_INVOKABLE fountainSerialPackager &setFountain(const quint8 &fountain, const quint8 &value);
     Q_INVOKABLE void clearData();
+    Q_INVOKABLE QByteArray getCurrentProgramSingleFountainStatus(const quint8 &Box_ID, const quint8 &FO_ID, const quint8  &Program_ID);
     static QByteArray fountainDeviceHandshake();
     static QByteArray fountainDeviceWifiOK();
     static QByteArray fountainDeviceRequestWifi();
@@ -99,6 +102,10 @@ public:
     QString getWifiPassword();
 
     quint8 getStatusCode();
+    quint8 getOpCode();
+    quint8 getBoxID();
+    quint8 getFOID();
+    QByteArray getData();
 };
 
 #endif // FOUNTAINSERIALPACKAGER_H

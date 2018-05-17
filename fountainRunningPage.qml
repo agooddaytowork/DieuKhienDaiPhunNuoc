@@ -45,6 +45,17 @@ Item {
                 fountainprogram_IDModel.setProperty(i,"online",theTcpClient.getFountainStatus(i))
             }
         }
+
+
+        onUpdateCurrentProgramSingleFountain:
+        {
+            loadingDialog.close()
+            contronProgramComboBox.currentIndex = theTcpClient.getCurrentProgram()
+            effectComboBox.currentIndex = theTcpClient.getCurrentEffect()
+            speedComboBox.currentIndex = theTcpClient.getCurrentSpeed()
+            fountainSpeedControlRepeatComboBox.currentIndex = theTcpClient.getCurrentSpeed()
+        }
+
     }
 
     Component.onCompleted:
@@ -936,27 +947,19 @@ Item {
                     width: fountainBoxGridView.cellWidth
                     height: fountainBoxGridView.cellHeight
                     property int cellIndex: index
-                    enabled:
-                    {
+                    enabled: true
+                    //                    {
 
-                        if(root.operatingMode !== 0 && fO_Name =="Tất Cả Đài")
-                        {
-                            false
-                        }
-                        else
-                        {
-                            true
-                        }
+                    //                        if(root.operatingMode !== 0 && fO_Name =="Tất Cả Đài")
+                    //                        {
+                    //                            false
+                    //                        }
+                    //                        else
+                    //                        {
+                    //                            true
+                    //                        }
 
-//                        if( root.setSpeedMode && fO_Name =="Tất Cả Đài")
-//                        {
-//                            false
-//                        }
-//                        else
-//                        {
-//                            true
-//                        }
-                    }
+                    //                    }
 
 
                     Text {
@@ -990,14 +993,14 @@ Item {
                     //                            }
                     //                        }
 
-//                                            font.pixelSize: 16
-//                                            anchors.right: parent.right
-//                                            anchors.bottom: parent.bottom
-//                                            anchors.rightMargin: 20
-//                                            anchors.bottomMargin: 20
-//                                            color: "white"
-//                                            visible: fO_ID === 10 ? false : true
-//                                        }
+                    //                                            font.pixelSize: 16
+                    //                                            anchors.right: parent.right
+                    //                                            anchors.bottom: parent.bottom
+                    //                                            anchors.rightMargin: 20
+                    //                                            anchors.bottomMargin: 20
+                    //                                            color: "white"
+                    //                                            visible: fO_ID === 10 ? false : true
+                    //                                        }
 
 
                     background: Rectangle{
@@ -1009,7 +1012,7 @@ Item {
                                 "tomato"
                             }
 
-//                            else if(operationMode == 0 || operationMode == 2 || (root.setSpeedMode && fO_Name =="Tất Cả Đài"))
+                            //                            else if(operationMode == 0 || operationMode == 2 || (root.setSpeedMode && fO_Name =="Tất Cả Đài"))
                             else if(operationMode == 0 || operationMode == 2 || (root.operatingMode !== 0 && fO_Name =="Tất Cả Đài"))
                             {
                                 "#3d3d3d"
@@ -1078,6 +1081,18 @@ Item {
                 text: qsTr("Cập nhật")
                 DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
             }
+            Button{
+                text: qsTr("Trạng thái")
+                DialogButtonBox.buttonRole: DialogButtonBox.HelpRole
+            }
+        }
+
+        onHelpRequested:
+        {
+
+            theTcpClient.sendProgram("updateProgramStatus", fountainSerialPackager.getCurrentProgramSingleFountainStatus(electricalBoxGridView.electricalBoxCellCurrentIndex, fountainBoxGridView.fountainBoxCellCurrentIndex, contronProgramComboBox.currentIndex))
+
+            loadingDialog.open()
         }
 
         onAccepted:
@@ -1103,7 +1118,7 @@ Item {
                 }
                 else if(root.operatingMode == 2)
                 {
-  theTcpClient.sendProgram("updateEffectProgram", fountainSerialPackager.setProgramEffectForSingleFountain(Box_ID,FO_ID,contronProgramComboBox.currentIndex,effectComboBox.currentIndex,speedComboBox.currentIndex,fountainSpeedControlRepeatComboBox.currentIndex))
+                    theTcpClient.sendProgram("updateEffectProgram", fountainSerialPackager.setProgramEffectForSingleFountain(Box_ID,FO_ID,contronProgramComboBox.currentIndex,effectComboBox.currentIndex,speedComboBox.currentIndex,fountainSpeedControlRepeatComboBox.currentIndex))
                 }
             }
         }
@@ -1177,7 +1192,7 @@ Item {
                 text: qsTr("Lặp lại: ")
                 color: "white"
                 font.pixelSize: 16
-                 visible: root.operatingMode == 2 ? true: false
+                visible: root.operatingMode == 2 ? true: false
 
             }
             ComboBox
@@ -1186,7 +1201,7 @@ Item {
                 model: 100
                 editable: true
                 inputMethodHints:  Qt.ImhPreferNumbers
-                 visible: root.operatingMode == 2 ? true: false
+                visible: root.operatingMode == 2 ? true: false
 
             }
             Text {
@@ -1387,7 +1402,7 @@ Item {
                 width: parent.width
                 wrapMode: Label.Wrap
                 horizontalAlignment: Qt.AlignHCenter
-                text: "Gửi lệnh cho server ..."
+                text: "Gửi lệnh cho đài phun nước ..."
             }
 
 
@@ -2278,7 +2293,7 @@ Item {
     Timer
     {
         id: errorTimer
-        interval: 60000
+        interval: 15000
         repeat: false
         triggeredOnStart: false
 

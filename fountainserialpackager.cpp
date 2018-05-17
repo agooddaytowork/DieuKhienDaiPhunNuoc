@@ -301,28 +301,30 @@ void fountainSerialPackager::decodePackage(const QByteArray &data)
             case 3:
                 m_PackageLength = m_PackageLength | data[i];
 
-                if(m_PackageLength != (data.count() -1))
+                if(m_PackageLength != (data.count() -1) && data[data.count()-1] != m_stopFlag)
                 {
                     return;
                 }
-
                 break;
             case 4:
                 m_BoxID = data[i];
                 break;
             case 5:
-                m_StatusCode = data[i];
+                m_FOID = data[i];
                 break;
             default:
 
+                if(i == 6)
+                {
+                    m_StatusCode = data[i];
+                }
                 if(i != (data.count() -1))
                 {
-                m_Data.append(data[i]);
+                    m_Data.append(data[i]);
                 }
                 break;
             }
         }
-
         qDebug() << "package is valid";
         qDebug() << "Data: " + m_Data;
         m_IsPackageValid = true;
@@ -336,17 +338,68 @@ void fountainSerialPackager::decodePackage(const QByteArray &data)
 
 QString fountainSerialPackager::getWifiName()
 {
-return m_WifiName;
+
+    m_WifiName.clear();
+    int i = 1;
+
+    while (m_Data[i] != 0x1B && i < m_Data.count()) {
+
+        m_WifiName.append(m_Data.at(i));
+        i++;
+    }
+    return m_WifiName;
 }
 
 QString fountainSerialPackager::getWifiPassword()
 {
-return m_WifiPassword;
+
+    m_WifiPassword.clear();
+    int i = 1;
+    while (m_Data[i] != 0x1B && i < m_Data.count()) {
+        i++;
+    }
+    i++;
+    for(i; i < m_Data.count(); i++)
+    {
+        m_WifiPassword.append(m_Data.at(i));
+    }
+
+    return m_WifiPassword;
 }
 
 quint8 fountainSerialPackager::getStatusCode()
 {
  return m_StatusCode;
+}
+
+quint8 fountainSerialPackager::getOpCode()
+{
+    return m_OperationCode;
+}
+
+quint8 fountainSerialPackager::getBoxID()
+{
+    return m_BoxID;
+}
+
+quint8 fountainSerialPackager::getFOID()
+{
+    return m_FOID;
+}
+
+QByteArray fountainSerialPackager::getCurrentProgramSingleFountainStatus(const quint8 &Box_ID, const quint8 &FO_ID, const quint8 &Program_ID)
+{
+
+    fountainSerialPackager aPackage;
+
+    return aPackage.setOpcode(m_OpCode_updateCurrentStatusOfProgramSingleFountain).setBoxID(Box_ID)
+.setFOID(FO_ID).setProgramID(Program_ID).setData(0x00).setData(0x00).setData(0x00).setPackageLength().generateSerialPackage();
+
+}
+
+QByteArray fountainSerialPackager::getData()
+{
+    return m_Data;
 }
 
 

@@ -27,11 +27,18 @@ class fountainClient: public QObject
     bool m_Connected;
     bool m_IsFountainOnline;
     bool m_IsTimeOut;
+
+
+
     QString m_CurrentControllingId;
 
     QTimer *m_Timer;
     QHash<int, bool> m_fountainStatusHash;
 
+    quint8 m_currentProgram;
+    quint8 m_currentEffect;
+    quint8 m_currentSpeed;
+    quint8 m_currentRepeat;
 
 
 public:
@@ -47,6 +54,10 @@ public:
     Q_INVOKABLE void disconnect();
     Q_INVOKABLE void sendDiconnectNotification();
     Q_INVOKABLE void requestPermission();
+    Q_INVOKABLE int getCurrentProgram();
+    Q_INVOKABLE int getCurrentEffect();
+    Q_INVOKABLE int getCurrentSpeed();
+    Q_INVOKABLE int getCurrentRepeat();
 
 
     bool isSVOnline() const;
@@ -67,6 +78,7 @@ signals:
 
     void fountainStatus();
     void serverOffline();
+    void updateCurrentProgramSingleFountain();
 
 
 
