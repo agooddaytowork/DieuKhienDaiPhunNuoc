@@ -112,6 +112,15 @@ ApplicationWindow {
                     //                    }
 
                     MenuItem {
+                        text: "Lấy quyền điểu khiển"
+                        font.pixelSize: 16
+                        onTriggered:{
+                            theTcpClient.requestPermission()
+                        }
+
+                    }
+
+                    MenuItem {
                         text: "Chỉnh chế độ hoạt động đài phun"
                         font.pixelSize: 16
                         onTriggered:{

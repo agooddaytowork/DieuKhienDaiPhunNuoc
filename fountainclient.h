@@ -7,7 +7,7 @@
 #include <QtNetwork>
 #include <QTimer>
 
-#define fountainClientDebug (0)
+#define fountainClientDebug (1)
 
 class fountainClient: public QObject
 {

@@ -5,7 +5,7 @@
 #include "tcppackager.h"
 #include "fountainserialpackager.h"
 
-#define readInterval 350
+#define readInterval 400
 
 
 
@@ -76,9 +76,26 @@ void fountainClient::connect()
 void fountainClient::readyReadHandler()
 {
 
+    static int readCounter = 0;
     in.startTransaction();
     QByteArray result;
     in >> result;
+
+    if(result.count() == 0)
+    {
+        readCounter++;
+    }
+    else
+    {
+        readCounter = 0;
+        if(!m_Timer->isActive())
+        m_Timer->start();
+    }
+    if(readCounter == 20)
+    {
+        m_Timer->stop();
+        readCounter = 0;
+    }
 
     if(tcpPackager::isPackageValid(result))
     {
