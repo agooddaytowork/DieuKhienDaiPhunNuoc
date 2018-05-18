@@ -49,6 +49,10 @@ fountainClient::fountainClient(QObject *parent): QObject(parent), tcpSocket(new 
         setIsSVOnline(false);
         m_Timer->stop();
         emit serverOffline();
+        for (int i = 0; i < 8;i++)
+        {
+            m_fountainStatusHash.insert(i, false);
+        }
     });
 
     //    QObject::connect(tcpSocket,&QTcpSocket::error, [=](){
@@ -305,21 +309,44 @@ void fountainClient::setFountainStatus(const int &id, const bool &status)
 
 int fountainClient::getCurrentProgram()
 {
-    return m_currentProgram;
+    return (int) m_currentProgram;
 }
 
 int fountainClient::getCurrentEffect()
 {
-    return m_currentEffect;
+    return (int)m_currentEffect;
 }
 
 int fountainClient::getCurrentRepeat()
 {
-    return m_currentRepeat;
+    return (int) m_currentRepeat;
 }
 
 int fountainClient::getCurrentSpeed()
 {
-    return m_currentSpeed;
+    return (int)m_currentSpeed;
+}
+
+void fountainClient::updateSecretKeyToFountainDevices(const QString &key)
+{
+    QByteArray block;
+
+    QDataStream out(&block, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_5_8);
+
+    out << tcpPackager::updateSecretKey(key);
+    tcpSocket->write(block);
+}
+
+void fountainClient::setGlobalSecretKey(const QString &key)
+{
+    tcpPackager::setSecretKey(key.toUtf8());
+}
+
+void fountainClient::setLocalSecretKey(const QString &key)
+{
+
+    tcpPackager::setSecretKey(key.toUtf8());
+
 }
 

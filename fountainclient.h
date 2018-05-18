@@ -7,7 +7,7 @@
 #include <QtNetwork>
 #include <QTimer>
 
-#define fountainClientDebug (1)
+#define fountainClientDebug (0)
 
 class fountainClient: public QObject
 {
@@ -45,6 +45,9 @@ public:
     fountainClient(QObject *parent = nullptr);
 
 
+    Q_INVOKABLE void setLocalSecretKey(const QString &key);
+    Q_INVOKABLE void setGlobalSecretKey(const QString &key);
+
     Q_INVOKABLE void connect(const QString &ip, const quint16 &port);
     Q_INVOKABLE void connect();
     Q_INVOKABLE void sendProgram(const QString &programName, const QByteArray &program);
@@ -58,6 +61,8 @@ public:
     Q_INVOKABLE int getCurrentEffect();
     Q_INVOKABLE int getCurrentSpeed();
     Q_INVOKABLE int getCurrentRepeat();
+
+    void updateSecretKeyToFountainDevices(const QString &key);
 
 
     bool isSVOnline() const;

@@ -50,10 +50,10 @@ Item {
         onUpdateCurrentProgramSingleFountain:
         {
             loadingDialog.close()
-            contronProgramComboBox.currentIndex = theTcpClient.getCurrentProgram()
+//            contronProgramComboBox.currentIndex = theTcpClient.getCurrentProgram()
             effectComboBox.currentIndex = theTcpClient.getCurrentEffect()
             speedComboBox.currentIndex = theTcpClient.getCurrentSpeed()
-            fountainSpeedControlRepeatComboBox.currentIndex = theTcpClient.getCurrentSpeed()
+            fountainSpeedControlRepeatComboBox.currentIndex = theTcpClient.getCurrentRepeat()
         }
 
     }
@@ -1067,7 +1067,22 @@ Item {
 
         focus: true
         modal: true
-        title: "Điều khiển tốc độ: " + titleString
+        title: {
+
+            if(root.operatingMode == 1)
+            {
+                "Điều khiển tốc độ: " + titleString
+            }
+            else if(root.operatingMode == 2)
+            {
+               "Điều khiển hiệu ứng: " + titleString
+            }
+            else if(root.operatingMode == 0)
+            {
+                ""
+            }
+        }
+
         closePolicy: Popup.NoAutoClose
 
         footer: DialogButtonBox
@@ -1121,6 +1136,8 @@ Item {
                     theTcpClient.sendProgram("updateEffectProgram", fountainSerialPackager.setProgramEffectForSingleFountain(Box_ID,FO_ID,contronProgramComboBox.currentIndex,effectComboBox.currentIndex,speedComboBox.currentIndex,fountainSpeedControlRepeatComboBox.currentIndex))
                 }
             }
+
+//            loadingDialog.open()
         }
 
         onRejected:

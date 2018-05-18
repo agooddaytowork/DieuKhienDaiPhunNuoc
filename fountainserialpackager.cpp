@@ -79,6 +79,8 @@ QByteArray fountainSerialPackager::generateSerialPackage()
     package.append(m_PackageLength);
     package.append(m_Data);
     package.append(m_stopFlag);
+
+    qDebug() << package.toHex();
     return package;
 }
 

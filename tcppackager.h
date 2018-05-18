@@ -6,10 +6,12 @@
 #include <QCryptographicHash>
 #include <QDateTime>
 
+#define masterKey "theUltimateKey"
 #define theSecretKey "fountainController"
 class tcpPackager
 {
 
+    static QByteArray m_scecretKey;
 
 public:
     static QString m_clientId;
@@ -26,6 +28,7 @@ public:
     static QByteArray fountainResponse(const QByteArray &response);
     static QByteArray fountainStatus(const bool &status);
     static QByteArray fountainCurrentPlayingProgram(const QString &program);
+    static QByteArray updateSecretKey(const QString &key);
 
     static bool isPackageValid(const QByteArray &input);
     static QJsonObject packageToJson(const QByteArray &input);
@@ -34,6 +37,7 @@ public:
     static QByteArray requestToAddNewClient();
     static QByteArray requestToGetPermission();
     static QByteArray aboutToDisconnect();
+    static void setSecretKey(const QByteArray &newKey);
 
 
 

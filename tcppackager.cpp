@@ -6,6 +6,18 @@ tcpPackager::tcpPackager()
 }
 
 QString tcpPackager::m_clientId = tcpPackager::generateClientId();
+
+QByteArray tcpPackager::m_scecretKey = "fountainController";
+
+
+void tcpPackager::setSecretKey(const QByteArray &newKey)
+{
+    m_scecretKey = newKey;
+}
+
+
+
+
 QString tcpPackager::generateClientId()
 {
 
@@ -225,3 +237,20 @@ QByteArray tcpPackager::aboutToDisconnect()
     return aDocument.toJson();
 }
 
+QByteArray tcpPackager::updateSecretKey(const QString &key)
+{
+    QJsonObject thePackage;
+    qint64 theTimeStamp = QDateTime::currentMSecsSinceEpoch();
+    QByteArray time;
+    time.append(QString::number(theTimeStamp));
+    thePackage.insert("masterKey",(QString) masterKey);
+    thePackage.insert("ClientId", m_clientId);
+    thePackage.insert("ClientType", m_clientType);
+    thePackage.insert("UUID", (QString) QCryptographicHash::hash(theSecretKey + time, QCryptographicHash::Sha256));
+    thePackage.insert("TimeStamp",QString::number(theTimeStamp) );
+    thePackage.insert("Command", "updateSecretKey");
+    thePackage.insert("key", key);
+
+    QJsonDocument aDocument(thePackage);
+    return aDocument.toJson();
+}

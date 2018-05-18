@@ -111,14 +111,14 @@ ApplicationWindow {
 
                     //                    }
 
-                    MenuItem {
-                        text: "Lấy quyền điểu khiển"
-                        font.pixelSize: 16
-                        onTriggered:{
-                            theTcpClient.requestPermission()
-                        }
+//                    MenuItem {
+//                        text: "Lấy quyền điểu khiển"
+//                        font.pixelSize: 16
+//                        onTriggered:{
+//                            theTcpClient.requestPermission()
+//                        }
 
-                    }
+//                    }
 
                     MenuItem {
                         text: "Chỉnh chế độ hoạt động đài phun"
@@ -155,6 +155,13 @@ ApplicationWindow {
                             stackView.currentItem.openUpdateMotorTimeSavingDialog()
                         }
                     }
+//                    MenuItem {
+//                        text: "Cập nhật mật khẩu"
+//                        font.pixelSize: 16
+//                        onTriggered:{
+//                            theTcpClient.setLocalSecretKey("Test");
+//                        }
+//                    }
 
                     //                    MenuItem {
                     //                        text: "Chỉnh tốc độ chương trình"
@@ -611,6 +618,8 @@ ApplicationWindow {
         property string hostAddress: ""
         property bool mainController: false
         property bool advanceMode: false
+        property string secretKey : "fountainController"
+        property string secretKeyOld : "fountainController"
 
     }
 
