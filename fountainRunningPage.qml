@@ -31,7 +31,9 @@ Item {
         {
             if(isPendingForReply)
             {
+                errorTimer.stop()
                 loadingDialog.close()
+                successDialog.status = "Cập nhật thành công!"
                 successDialog.open()
             }
 
@@ -1108,6 +1110,7 @@ Item {
             theTcpClient.sendProgram("updateProgramStatus", fountainSerialPackager.getCurrentProgramSingleFountainStatus(electricalBoxGridView.electricalBoxCellCurrentIndex, fountainBoxGridView.fountainBoxCellCurrentIndex, contronProgramComboBox.currentIndex))
 
             loadingDialog.open()
+
         }
 
         onAccepted:
@@ -1137,7 +1140,7 @@ Item {
                 }
             }
 
-//            loadingDialog.open()
+           loadingDialog.open()
         }
 
         onRejected:
@@ -1411,6 +1414,10 @@ Item {
         standardButtons:Dialog.Cancel
 
 
+        onOpened: {
+            errorTimer.start()
+        }
+
         Column {
             spacing: 40
             width: parent.width
@@ -1441,7 +1448,7 @@ Item {
         x: (parent.width - width) / 2
         y: (parent.height - height) / 4
         // parent: Overlay.overlay
-
+        property string status: "Some text  here first!!!"
         focus: true
         modal: true
         title: "Thông báo "
@@ -1455,9 +1462,10 @@ Item {
 
             Label {
 
+
                 wrapMode: Label.Wrap
                 horizontalAlignment: Qt.AlignHCenter
-                text: "Cập nhật thành công !"
+                text: successDialog.status
             }
         }
 
@@ -2310,13 +2318,16 @@ Item {
     Timer
     {
         id: errorTimer
-        interval: 15000
+        interval: 5000
         repeat: false
         triggeredOnStart: false
 
         onTriggered:
         {
             loadingDialog.close()
+            successDialog.status = "Cập nhật thất bại!"
+            successDialog.open()
+
         }
     }
 
