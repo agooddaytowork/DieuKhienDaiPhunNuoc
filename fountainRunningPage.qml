@@ -1396,17 +1396,28 @@ Item {
         }
         onReset:
         {
+            var Box_ID = electricalBoxGridView.electricalBoxCellCurrentIndex
+            var FO_ID = fountainBoxGridView.fountainBoxCellCurrentIndex
+
+            if(FO_ID === 0x00)
+            {
+                FO_ID = 10
+            }
+            else
+            {
+                FO_ID = FO_ID -1
+            }
             console.log("RESSET")
             fountainControlDialog.close()
 
             // write settings to programModel
-            fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"program_ID", programComboBox.currentIndex)
-            fountainprogram_IDModel.get(electricalBoxGridView.electricalBoxCellCurrentIndex).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"repeat", repeatCombobox.currentIndex)
+            fountainprogram_IDModel.get(Box_ID).fountains.setProperty(FO_ID,"program_ID", programComboBox.currentIndex)
+            fountainprogram_IDModel.get(Box_ID).fountains.setProperty(FO_ID,"repeat", repeatCombobox.currentIndex)
 
 
             if(theTcpClient.isSVOnline)
             {
-                theTcpClient.sendProgram("restartProgramOnFountain", fountainSerialPackager.restartProgramOnFountain(electricalBoxGridView.electricalBoxCellCurrentIndex,fountainBoxGridView.fountainBoxCellCurrentIndex,programComboBox.currentIndex,repeatCombobox.currentIndex))
+                theTcpClient.sendProgram("restartProgramOnFountain", fountainSerialPackager.restartProgramOnFountain(Box_ID,FO_ID,programComboBox.currentIndex,repeatCombobox.currentIndex))
                 loadingDialog.open()
             }
 
