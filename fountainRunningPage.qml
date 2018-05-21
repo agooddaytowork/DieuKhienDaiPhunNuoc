@@ -46,12 +46,16 @@ Item {
             {
                 fountainprogram_IDModel.setProperty(i,"online",theTcpClient.getFountainStatus(i))
             }
+
         }
 
 
         onUpdateCurrentProgramSingleFountain:
         {
             loadingDialog.close()
+            errorTimer.stop()
+            successDialog.status = "Cập nhật thành công!"
+            successDialog.open()
 //            contronProgramComboBox.currentIndex = theTcpClient.getCurrentProgram()
             effectComboBox.currentIndex = theTcpClient.getCurrentEffect()
             speedComboBox.currentIndex = theTcpClient.getCurrentSpeed()
@@ -1122,6 +1126,7 @@ Item {
 
             loadingDialog.open()
 
+
         }
 
         onAccepted:
@@ -1374,7 +1379,6 @@ Item {
                 theTcpClient.sendProgram("controlFountain", fountainSerialPackager.runProgramOnFountainDirectly(Box_ID,FO_ID,programComboBox.currentIndex,repeatCombobox.currentIndex))
 
 
-                root.isPendingForReply = true
                 loadingDialog.open()
             }
             else
@@ -1403,7 +1407,6 @@ Item {
             if(theTcpClient.isSVOnline)
             {
                 theTcpClient.sendProgram("restartProgramOnFountain", fountainSerialPackager.restartProgramOnFountain(electricalBoxGridView.electricalBoxCellCurrentIndex,fountainBoxGridView.fountainBoxCellCurrentIndex,programComboBox.currentIndex,repeatCombobox.currentIndex))
-                root.isPendingForReply = true
                 loadingDialog.open()
             }
 
@@ -1427,6 +1430,7 @@ Item {
 
         onOpened: {
             errorTimer.start()
+            root.isPendingForReply = true
         }
 
         Column {
@@ -1852,8 +1856,6 @@ Item {
 
                     theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x07,hour,minute,second))
                 }
-
-                root.isPendingForReply = true
                 loadingDialog.open()
             }
 
@@ -2009,7 +2011,6 @@ Item {
             if(theTcpClient.isSVOnline)
             {
                 theTcpClient.sendProgram("LightSavingTimer", fountainSerialPackager.setLightSavingTimeForElctricalbox(lightSavingDialogComboBox.currentIndex,lightSavingOnHourComboBox.currentIndex,lightSavingOnMinuteComboBox.currentIndex,lightSavingOffHourComboBox.currentIndex,lightSavingOffMinuteComboBox.currentIndex))
-                root.isPendingForReply = true
                 loadingDialog.open()
             }
         }
@@ -2147,7 +2148,6 @@ Item {
             if(theTcpClient.isSVOnline)
             {
                 theTcpClient.sendProgram("motorTimeSaving", fountainSerialPackager.setMotorSavingTimeForElectricalBox(motorTimeSavingDialog.currentIndex, ca1OnHour,ca1OnMinute,ca1OFFHour,ca1FFMinute,ca2OnHour,ca2OnMinute,ca2OFFHour,ca2OFFMinute))
-                root.isPendingForReply = true
                 loadingDialog.open()
             }
         }
