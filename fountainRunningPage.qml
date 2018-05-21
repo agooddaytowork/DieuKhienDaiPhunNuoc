@@ -1106,8 +1106,19 @@ Item {
 
         onHelpRequested:
         {
+            var Box_ID = electricalBoxGridView.electricalBoxCellCurrentIndex
+            var FO_ID = fountainBoxGridView.fountainBoxCellCurrentIndex
 
-            theTcpClient.sendProgram("updateProgramStatus", fountainSerialPackager.getCurrentProgramSingleFountainStatus(electricalBoxGridView.electricalBoxCellCurrentIndex, fountainBoxGridView.fountainBoxCellCurrentIndex, contronProgramComboBox.currentIndex))
+            if(FO_ID === 0x00)
+            {
+                FO_ID = 10
+            }
+            else
+            {
+                FO_ID = FO_ID -1
+            }
+
+            theTcpClient.sendProgram("updateProgramStatus", fountainSerialPackager.getCurrentProgramSingleFountainStatus(Box_ID, FO_ID, contronProgramComboBox.currentIndex))
 
             loadingDialog.open()
 

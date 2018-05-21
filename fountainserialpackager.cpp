@@ -207,7 +207,7 @@ QByteArray fountainSerialPackager::setSpeedAllProgramsPerFountain(const quint8 &
 QByteArray fountainSerialPackager::setProgramEffectForSingleFountain(const quint8 &Box_ID, const quint8 &FO_ID, const quint8  &Program_ID, const quint8 &effectID, const quint8 &speed, const quint8 &repeat)
 {
     fountainSerialPackager aPackage;
-    return aPackage.setOpcode(m_OpCode_setSpeedSingleProgramSingleFountain).setBoxID(Box_ID).setFOID(FO_ID).setProgramID(Program_ID).setData(effectID).setData(speed).setData(repeat).setPackageLength().generateSerialPackage();
+    return aPackage.setOpcode(m_OpCode_setProgramSingleFountain).setBoxID(Box_ID).setFOID(FO_ID).setProgramID(Program_ID).setData(effectID).setData(speed).setData(repeat).setPackageLength().generateSerialPackage();
 
 }
 
