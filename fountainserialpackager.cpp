@@ -25,7 +25,7 @@ fountainSerialPackager::fountainSerialPackager(const QByteArray &data,QObject *p
             QByteArray tmpWifiPassword;
             for(int i = 0; i < m_Data.count(); i++)
             {
-                if(m_Data[i] == (quint8) 0x1B)
+                if(m_Data.at(i) == (quint8) 0x1B)
                 {
                     isWifiPassword = true;
                 }
@@ -344,7 +344,7 @@ QString fountainSerialPackager::getWifiName()
     m_WifiName.clear();
     int i = 1;
 
-    while (m_Data[i] != 0x1B && i < m_Data.count()) {
+    while (m_Data.at(i)!= 0x1B && i < m_Data.count()) {
 
         m_WifiName.append(m_Data.at(i));
         i++;
@@ -357,7 +357,7 @@ QString fountainSerialPackager::getWifiPassword()
 
     m_WifiPassword.clear();
     int i = 1;
-    while (m_Data[i] != 0x1B && i < m_Data.count()) {
+    while (m_Data.at(i) != 0x1B && i < m_Data.count()) {
         i++;
     }
     i++;

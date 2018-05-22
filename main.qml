@@ -13,6 +13,10 @@ ApplicationWindow {
 
     property bool aboutToclose: false
 
+    Component.onCompleted:
+    {
+        theTcpClient.setLocalSecretKey(appSetting.secretKey)
+    }
 
     onClosing:
     {
@@ -84,6 +88,11 @@ ApplicationWindow {
                 anchors.verticalCenter: parent.verticalCenter
 
                 onClicked: optionsMenu.open()
+
+                onPressAndHold:
+                {
+                    changeSecretKeyDialog.open()
+                }
 
                 Menu {
                     id: optionsMenu
@@ -612,6 +621,61 @@ ApplicationWindow {
         }
 
     }
+
+    Dialog
+    {
+        id: changeSecretKeyDialog
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 4
+        // parent: Overlay.overlay
+
+        focus: true
+        modal: true
+        title: "Thoát"
+        closePolicy: Popup.NoAutoClose
+        standardButtons:Dialog.Yes | Dialog.No
+
+        ColumnLayout
+        {
+            spacing: 20
+            anchors.fill:  parent
+
+            Label
+            {
+                text: "Đổi Secret key"
+            }
+            TextField
+            {
+                id: newSecretKeyTextField
+                placeholderText: "secretKey"
+                width: 250
+            }
+
+            Label
+            {
+                text: "Key hiện tại: " + appSetting.secretKey
+            }
+
+        }
+
+        onAccepted:
+        {
+            appSetting.secretKey = newSecretKeyTextField.text
+            theTcpClient.setLocalSecretKey(newSecretKeyTextField.text)
+
+        }
+        onRejected:
+        {
+            changeSecretKeyDialog.close()
+        }
+
+    }
+
+
+
+
+
+
     Settings
     {
         id: appSetting
@@ -624,3 +688,5 @@ ApplicationWindow {
     }
 
 }
+
+

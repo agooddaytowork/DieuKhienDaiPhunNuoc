@@ -348,5 +348,6 @@ void fountainClient::setLocalSecretKey(const QString &key)
 
     tcpPackager::setSecretKey(key.toUtf8());
 
+
 }
 
