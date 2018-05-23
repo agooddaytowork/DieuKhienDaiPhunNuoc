@@ -16,5 +16,6 @@
         <file>images/effect.png</file>
         <file>images/effectActivated.png</file>
         <file>images/runDirect.png</file>
+        <file>images/key.png</file>
     </qresource>
 </RCC>

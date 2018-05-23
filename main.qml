@@ -348,6 +348,37 @@ ApplicationWindow {
                 }
             }
 
+            Rectangle
+            {
+                width: 50
+                height: toolButton.implicitHeight
+                //                anchors.right: parent.right
+                //                anchors.rightMargin: 40 + toolButton.implicitWidth
+                anchors.verticalCenter: parent.verticalCenter
+                color: globalKeyIconMouseArea.pressed ? "tomato" : "transparent"
+
+                id: globalKeyIcon
+                Image
+                {
+                    anchors.centerIn: parent
+//                    source: initSetupModePage.setSpeedMode ? "images/effect.png":"images/effectActivated.png"
+                     source: "images/key.png"
+                    scale: 0.6
+                }
+                visible: appSetting.advanceMode
+
+                MouseArea
+                {
+                    id: globalKeyIconMouseArea
+                    anchors.fill: parent
+
+                    onClicked:
+                    {
+//
+                    }
+                }
+            }
+
         }
 
     }
