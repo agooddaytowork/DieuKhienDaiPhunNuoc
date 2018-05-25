@@ -391,6 +391,7 @@ ApplicationWindow {
                             if(allFountainsOnline)
                             {
                                 changeSecretKeyDialog.open()
+
                             }
                         }
                         else
@@ -789,9 +790,11 @@ ApplicationWindow {
             spacing: 20
             anchors.fill:  parent
 
-            Label
+            TextArea
             {
+                width: 400
                 text: statusDialog.status
+                wrapMode: TextEdit.Wrap
             }
 
         }
