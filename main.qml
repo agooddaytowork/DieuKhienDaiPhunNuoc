@@ -120,14 +120,14 @@ ApplicationWindow {
 
                     //                    }
 
-//                    MenuItem {
-//                        text: "Lấy quyền điểu khiển"
-//                        font.pixelSize: 16
-//                        onTriggered:{
-//                            theTcpClient.requestPermission()
-//                        }
+                    //                    MenuItem {
+                    //                        text: "Lấy quyền điểu khiển"
+                    //                        font.pixelSize: 16
+                    //                        onTriggered:{
+                    //                            theTcpClient.requestPermission()
+                    //                        }
 
-//                    }
+                    //                    }
 
                     MenuItem {
                         text: "Chỉnh chế độ hoạt động đài phun"
@@ -164,13 +164,13 @@ ApplicationWindow {
                             stackView.currentItem.openUpdateMotorTimeSavingDialog()
                         }
                     }
-//                    MenuItem {
-//                        text: "Cập nhật mật khẩu"
-//                        font.pixelSize: 16
-//                        onTriggered:{
-//                            theTcpClient.setLocalSecretKey("Test");
-//                        }
-//                    }
+                    //                    MenuItem {
+                    //                        text: "Cập nhật mật khẩu"
+                    //                        font.pixelSize: 16
+                    //                        onTriggered:{
+                    //                            theTcpClient.setLocalSecretKey("Test");
+                    //                        }
+                    //                    }
 
                     //                    MenuItem {
                     //                        text: "Chỉnh tốc độ chương trình"
@@ -183,44 +183,44 @@ ApplicationWindow {
             }
 
 
-//            Rectangle
-//            {
-//                width: 40
-//                height: toolButton.implicitHeight
-//                //  anchors.right: parent.right
-//                //  anchors.rightMargin: 20
-//                anchors.verticalCenter: parent.verticalCenter
-//                color: serverStatusMouseArea.pressed? "tomato" : "transparent"
+            //            Rectangle
+            //            {
+            //                width: 40
+            //                height: toolButton.implicitHeight
+            //                //  anchors.right: parent.right
+            //                //  anchors.rightMargin: 20
+            //                anchors.verticalCenter: parent.verticalCenter
+            //                color: serverStatusMouseArea.pressed? "tomato" : "transparent"
 
-//                id: serverStatusIcon
-//                radius: 5
-//                Image
-//                {
-//                    id: svStatusImage
-//                    anchors.centerIn: parent
-//                    source: theTcpClient.isSVOnline ? "images/serverOnline.png" : "images/serverOffline.png"
-//                    scale: 0.8
+            //                id: serverStatusIcon
+            //                radius: 5
+            //                Image
+            //                {
+            //                    id: svStatusImage
+            //                    anchors.centerIn: parent
+            //                    source: theTcpClient.isSVOnline ? "images/serverOnline.png" : "images/serverOffline.png"
+            //                    scale: 0.8
 
-//                }
+            //                }
 
-//                MouseArea
-//                {
-//                    id: serverStatusMouseArea
-//                    anchors.fill: parent
+            //                MouseArea
+            //                {
+            //                    id: serverStatusMouseArea
+            //                    anchors.fill: parent
 
-//                    onClicked:
-//                    {
-//                        svAddresDialog.open()
-//                    }
+            //                    onClicked:
+            //                    {
+            //                        svAddresDialog.open()
+            //                    }
 
-//                    pressAndHoldInterval: 3000
-//                    onPressAndHold:
-//                    {
-//                        setMainControllerDialog.open()
-//                    }
-//                }
+            //                    pressAndHoldInterval: 3000
+            //                    onPressAndHold:
+            //                    {
+            //                        setMainControllerDialog.open()
+            //                    }
+            //                }
 
-//            }
+            //            }
 
             Rectangle
             {
@@ -280,7 +280,7 @@ ApplicationWindow {
 
                     onClicked:
                     {
-                       stackView.currentItem.operatingMode = 0
+                        stackView.currentItem.operatingMode = 0
                     }
                 }
             }
@@ -298,7 +298,7 @@ ApplicationWindow {
                 Image
                 {
                     anchors.centerIn: parent
-//                    source: initSetupModePage.setSpeedMode ? "images/speedActivated.png":"images/speed.png"
+                    //                    source: initSetupModePage.setSpeedMode ? "images/speedActivated.png":"images/speed.png"
                     source:"images/speed.png"
                     scale: 0.6
                 }
@@ -311,8 +311,8 @@ ApplicationWindow {
 
                     onClicked:
                     {
-//                        initSetupModePage.setSpeedMode = !initSetupModePage.setSpeedMode
-                          stackView.currentItem.operatingMode = 1
+                        //                        initSetupModePage.setSpeedMode = !initSetupModePage.setSpeedMode
+                        stackView.currentItem.operatingMode = 1
                     }
                 }
             }
@@ -329,8 +329,8 @@ ApplicationWindow {
                 Image
                 {
                     anchors.centerIn: parent
-//                    source: initSetupModePage.setSpeedMode ? "images/effect.png":"images/effectActivated.png"
-                     source: "images/effect.png"
+                    //                    source: initSetupModePage.setSpeedMode ? "images/effect.png":"images/effectActivated.png"
+                    source: "images/effect.png"
                     scale: 0.6
                 }
                 visible: appSetting.advanceMode
@@ -342,7 +342,7 @@ ApplicationWindow {
 
                     onClicked:
                     {
-//                        initSetupModePage.setSpeedMode = !initSetupModePage.setSpeedMode
+                        //                        initSetupModePage.setSpeedMode = !initSetupModePage.setSpeedMode
                         stackView.currentItem.operatingMode = 2
                     }
                 }
@@ -361,8 +361,8 @@ ApplicationWindow {
                 Image
                 {
                     anchors.centerIn: parent
-//                    source: initSetupModePage.setSpeedMode ? "images/effect.png":"images/effectActivated.png"
-                     source: "images/key.png"
+                    //                    source: initSetupModePage.setSpeedMode ? "images/effect.png":"images/effectActivated.png"
+                    source: "images/key.png"
                     scale: 0.6
                 }
                 visible: appSetting.advanceMode
@@ -374,7 +374,35 @@ ApplicationWindow {
 
                     onClicked:
                     {
-//
+                        var allFountainsOnline = true;
+                        if(theTcpClient.isSVOnline)
+                        {
+                            for (var i = 0; i < 8; i++)
+                            {
+                                if (theTcpClient.getFountainStatus(i))
+                                {
+                                    allFountainsOnline = false
+
+                                    statusDialog.open()
+                                    statusDialog.status = "Tất cả đài phun nước phải online để dùng chức năng này!"
+                                    break
+                                }
+                            }
+                            if(allFountainsOnline)
+                            {
+                                changeSecretKeyDialog.open()
+                            }
+                        }
+                        else
+                           {
+
+                            statusDialog.open()
+                            statusDialog.status = "Chưa kết nối tới đài phun nước!"
+                        }
+
+
+
+
                     }
                 }
             }
@@ -662,9 +690,10 @@ ApplicationWindow {
 
         focus: true
         modal: true
-        title: "Thoát"
+        title: "Đổi key"
         closePolicy: Popup.NoAutoClose
         standardButtons:Dialog.Yes | Dialog.No
+        property bool isGlobalKey: false
 
         ColumnLayout
         {
@@ -673,7 +702,8 @@ ApplicationWindow {
 
             Label
             {
-                text: "Đổi Secret key"
+                id: secretKeyLabel
+                text: "Đổi Global Secret key"
             }
             TextField
             {
@@ -691,8 +721,10 @@ ApplicationWindow {
 
         onAccepted:
         {
-            appSetting.secretKey = newSecretKeyTextField.text
-            theTcpClient.setLocalSecretKey(newSecretKeyTextField.text)
+
+            changeSecretKeyDialog.close()
+            askForChangeSecretKeyConfirmationDialog.open()
+            //            theTcpClient.setLocalSecretKey(newSecretKeyTextField.text)
 
         }
         onRejected:
@@ -700,10 +732,75 @@ ApplicationWindow {
             changeSecretKeyDialog.close()
         }
 
+        Dialog
+        {
+            id: askForChangeSecretKeyConfirmationDialog
+            x: (parent.width - width) / 2
+            y: (parent.height - height) / 4
+            // parent: Overlay.overlay
+
+            focus: true
+            modal: true
+            title: "Xác nhận"
+            closePolicy: Popup.NoAutoClose
+            standardButtons:Dialog.Yes | Dialog.No
+
+            ColumnLayout
+            {
+                spacing: 20
+                anchors.fill:  parent
+
+                Label
+                {
+                    text: "Xác nhận đổi secret key!"
+                }
+
+            }
+            onAccepted:
+            {
+                appSetting.secretKey = newSecretKeyTextField.text
+                theTcpClient.setGlobalSecretKey(newSecretKeyTextField.text)
+
+            }
+            onRejected:
+            {
+                askForChangeSecretKeyConfirmationDialog.close()
+            }
+        }
+
     }
 
 
+    Dialog
+    {
+        id: statusDialog
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 4
+        // parent: Overlay.overlay
+        property  string status: ""
+        focus: true
+        modal: true
+        title: "Thông báo:"
+        closePolicy: Popup.NoAutoClose
+        standardButtons:Dialog.Ok
 
+        ColumnLayout
+        {
+            spacing: 20
+            anchors.fill:  parent
+
+            Label
+            {
+                text: statusDialog.status
+            }
+
+        }
+        onAccepted:
+        {
+            statusDialog.close()
+
+        }
+    }
 
 
 
