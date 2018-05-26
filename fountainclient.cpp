@@ -188,7 +188,7 @@ void fountainClient::readyReadHandler()
 
 }
 
-void fountainClient::sendProgram( const QString &programName,const QByteArray &program)
+void fountainClient::sendProgram(const quint8 &BOX_ID, const QString &programName,const QByteArray &program)
 {
 
 
@@ -197,7 +197,7 @@ void fountainClient::sendProgram( const QString &programName,const QByteArray &p
     QDataStream out(&block, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_8);
 
-    out << tcpPackager::playProgram(programName,program);
+    out << tcpPackager::playProgram(BOX_ID, programName,program);
 
     tcpSocket->write(block);
 
@@ -341,6 +341,8 @@ void fountainClient::updateSecretKeyToFountainDevices(const QString &key)
 void fountainClient::setGlobalSecretKey(const QString &key)
 {
     tcpPackager::setSecretKey(key.toUtf8());
+
+    updateSecretKeyToFountainDevices(key);
 }
 
 void fountainClient::setLocalSecretKey(const QString &key)
@@ -348,6 +350,19 @@ void fountainClient::setLocalSecretKey(const QString &key)
 
     tcpPackager::setSecretKey(key.toUtf8());
 
+
+}
+
+void fountainClient::uploadFileBin(const quint8 &BOX_ID, const QString &fileURL)
+{
+    QByteArray block;
+
+    QDataStream out(&block, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_5_8);
+
+    out << tcpPackager::sendBinfile(BOX_ID,fileURL);
+
+    tcpSocket->write(block);
 
 }
 

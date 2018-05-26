@@ -164,6 +164,18 @@ ApplicationWindow {
                             stackView.currentItem.openUpdateMotorTimeSavingDialog()
                         }
                     }
+
+                    MenuItem {
+                        text: "Tải file bin tới đài phun nước"
+                        font.pixelSize: 16
+                        onTriggered:{
+
+                        stackView.currentItem.openUploadFileBinDialog()
+
+                        }
+
+
+                    }
                     //                    MenuItem {
                     //                        text: "Cập nhật mật khẩu"
                     //                        font.pixelSize: 16
@@ -382,7 +394,6 @@ ApplicationWindow {
                                 if (theTcpClient.getFountainStatus(i))
                                 {
                                     allFountainsOnline = false
-
                                     statusDialog.open()
                                     statusDialog.status = "Tất cả đài phun nước phải online để dùng chức năng này!"
                                     break
@@ -789,21 +800,21 @@ ApplicationWindow {
         {
             spacing: 20
             anchors.fill:  parent
-
+            width: 450
             TextArea
             {
                 width: 400
                 text: statusDialog.status
-                wrapMode: TextEdit.Wrap
+                wrapMode: TextEdit.WordWrap
             }
 
         }
         onAccepted:
         {
             statusDialog.close()
-
         }
     }
+
 
 
 
@@ -815,7 +826,6 @@ ApplicationWindow {
         property bool advanceMode: false
         property string secretKey : "fountainController"
         property string secretKeyOld : "fountainController"
-
     }
 
 }

@@ -105,6 +105,12 @@ Item {
 
     }
 
+    function openUploadFileBinDialog()
+    {
+        uploadFileBinDialog.open()
+        uploadFileBinDialogComboBox.model = fountainprogram_IDModel
+    }
+
     function openUpdateRTCDialog()
     {
         updateRTCDialogGridView.model =0
@@ -1122,7 +1128,7 @@ Item {
                 FO_ID = FO_ID -1
             }
 
-            theTcpClient.sendProgram("updateProgramStatus", fountainSerialPackager.getCurrentProgramSingleFountainStatus(Box_ID, FO_ID, contronProgramComboBox.currentIndex))
+            theTcpClient.sendProgram(Box_ID,"updateProgramStatus", fountainSerialPackager.getCurrentProgramSingleFountainStatus(Box_ID, FO_ID, contronProgramComboBox.currentIndex))
 
             loadingDialog.open()
 
@@ -1148,11 +1154,11 @@ Item {
             {
                 if(root.operatingMode == 1)
                 {
-                    theTcpClient.sendProgram("updateSpeed", fountainSerialPackager.setSpeedSingleProgramPerFountain(Box_ID,FO_ID,contronProgramComboBox.currentIndex,speedComboBox.currentIndex))
+                    theTcpClient.sendProgram(Box_ID,"updateSpeed", fountainSerialPackager.setSpeedSingleProgramPerFountain(Box_ID,FO_ID,contronProgramComboBox.currentIndex,speedComboBox.currentIndex))
                 }
                 else if(root.operatingMode == 2)
                 {
-                    theTcpClient.sendProgram("updateEffectProgram", fountainSerialPackager.setProgramEffectForSingleFountain(Box_ID,FO_ID,contronProgramComboBox.currentIndex,effectComboBox.currentIndex,speedComboBox.currentIndex,fountainSpeedControlRepeatComboBox.currentIndex))
+                    theTcpClient.sendProgram(Box_ID,"updateEffectProgram", fountainSerialPackager.setProgramEffectForSingleFountain(Box_ID,FO_ID,contronProgramComboBox.currentIndex,effectComboBox.currentIndex,speedComboBox.currentIndex,fountainSpeedControlRepeatComboBox.currentIndex))
                 }
             }
 
@@ -1376,7 +1382,7 @@ Item {
             {
 
 
-                theTcpClient.sendProgram("controlFountain", fountainSerialPackager.runProgramOnFountainDirectly(Box_ID,FO_ID,programComboBox.currentIndex,repeatCombobox.currentIndex))
+                theTcpClient.sendProgram(Box_ID,"controlFountain", fountainSerialPackager.runProgramOnFountainDirectly(Box_ID,FO_ID,programComboBox.currentIndex,repeatCombobox.currentIndex))
 
 
                 loadingDialog.open()
@@ -1417,7 +1423,7 @@ Item {
 
             if(theTcpClient.isSVOnline)
             {
-                theTcpClient.sendProgram("restartProgramOnFountain", fountainSerialPackager.restartProgramOnFountain(Box_ID,FO_ID,programComboBox.currentIndex,repeatCombobox.currentIndex))
+                theTcpClient.sendProgram(Box_ID,"restartProgramOnFountain", fountainSerialPackager.restartProgramOnFountain(Box_ID,FO_ID,programComboBox.currentIndex,repeatCombobox.currentIndex))
                 loadingDialog.open()
             }
 
@@ -1465,6 +1471,7 @@ Item {
         onRejected:
         {
             loadingDialog.close()
+            errorTimer.stop()
         }
     }
 
@@ -1499,6 +1506,87 @@ Item {
         {
             successDialog.close()
         }
+    }
+
+    Dialog
+    {
+        id: uploadFileBinDialog
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 4
+        // parent: Overlay.overlay
+
+        focus: true
+        modal: true
+        title: "Upload file Bin "
+        closePolicy: Popup.NoAutoClose
+        //        standardButtons:Dialog.Cancel
+        footer: DialogButtonBox{
+
+            Button {
+                text: qsTr("Hủy")
+                DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
+            }
+            Button {
+                text: qsTr("Cập Nhật")
+                DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+            }
+
+        }
+
+        onRejected:
+        {
+            uploadFileBinDialog.close()
+        }
+
+        onAccepted:
+        {
+            theTcpClient.uploadFileBin(uploadFileBinDialogComboBox.currentIndex, chooseFileBinDialog.fileURL)
+            loadingDialog.open()
+        }
+
+        Column
+        {
+                spacing: 10
+                width: 500
+
+                ComboBox
+                {
+                    id: uploadFileBinDialogComboBox
+                    model: 0
+                    textRole: "box_Name"
+                    width: 400
+
+                    onCurrentIndexChanged:
+                    {
+
+                    }
+                }
+
+                Button
+                {
+                    text: "Chọn file"
+
+                    onPressed: {
+                        chooseFileBinDialog.open()
+                    }
+                }
+                Label{
+                    id: binFileLabel
+                    text: ""
+                }
+
+                MyFileDialog
+                {
+                    id: chooseFileBinDialog
+
+                    onFileURLChanged:
+                    {
+                        binFileLabel.text = fileURL
+                    }
+                }
+        }
+
+
     }
 
     Dialog
@@ -1566,7 +1654,7 @@ Item {
                 }
                 if(theTcpClient.isSVOnline)
                 {
-                    theTcpClient.sendProgram("updateOperationMode", fountainSerialPackager.setOperationModeFountainsPerElectricalBOx(operationDialogCombobox.currentIndex))
+                    theTcpClient.sendProgram(operationDialogCombobox.currentIndex,"updateOperationMode", fountainSerialPackager.setOperationModeFountainsPerElectricalBOx(operationDialogCombobox.currentIndex))
                     fountainSerialPackager.clearData()
 
                 }
@@ -1596,7 +1684,7 @@ Item {
                 if(theTcpClient.isSVOnline)
                 {
 
-                    theTcpClient.sendProgram("updateSyncMode", fountainSerialPackager.setSyncModeForFountainsPerElectricalBox(operationDialogCombobox.currentIndex))
+                    theTcpClient.sendProgram(operationDialogCombobox.currentIndex,"updateSyncMode", fountainSerialPackager.setSyncModeForFountainsPerElectricalBox(operationDialogCombobox.currentIndex))
                     fountainSerialPackager.clearData()
                 }
             }
@@ -1809,7 +1897,7 @@ Item {
                     minute = parseInt(Qt.formatTime(new Date(),"mm"))
                     second = parseInt(Qt.formatTime(new Date(),"ss"))
 
-                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x00,hour,minute,second))
+                    theTcpClient.sendProgram(0,"updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x00,hour,minute,second))
                 }
                 if(isFO2)
                 {
@@ -1817,7 +1905,7 @@ Item {
                     minute = parseInt(Qt.formatTime(new Date(),"mm"))
                     second = parseInt(Qt.formatTime(new Date(),"ss"))
 
-                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x01,hour,minute,second))
+                    theTcpClient.sendProgram(1,"updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x01,hour,minute,second))
                 }
                 if(isFO3)
                 {
@@ -1825,7 +1913,7 @@ Item {
                     minute = parseInt(Qt.formatTime(new Date(),"mm"))
                     second = parseInt(Qt.formatTime(new Date(),"ss"))
 
-                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x02,hour,minute,second))
+                    theTcpClient.sendProgram(2,"updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x02,hour,minute,second))
                 }
                 if(isFO4)
                 {
@@ -1833,7 +1921,7 @@ Item {
                     minute = parseInt(Qt.formatTime(new Date(),"mm"))
                     second = parseInt(Qt.formatTime(new Date(),"ss"))
 
-                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x03,hour,minute,second))
+                    theTcpClient.sendProgram(3,"updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x03,hour,minute,second))
                 }
                 if(isFO5)
                 {
@@ -1841,7 +1929,7 @@ Item {
                     minute = parseInt(Qt.formatTime(new Date(),"mm"))
                     second = parseInt(Qt.formatTime(new Date(),"ss"))
 
-                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x04,hour,minute,second))
+                    theTcpClient.sendProgram(4,"updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x04,hour,minute,second))
                 }
                 if(isFO6)
                 {
@@ -1849,7 +1937,7 @@ Item {
                     minute = parseInt(Qt.formatTime(new Date(),"mm"))
                     second = parseInt(Qt.formatTime(new Date(),"ss"))
 
-                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x05,hour,minute,second))
+                    theTcpClient.sendProgram(5,"updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x05,hour,minute,second))
                 }
                 if(isFO7)
                 {
@@ -1857,7 +1945,7 @@ Item {
                     minute = parseInt(Qt.formatTime(new Date(),"mm"))
                     second = parseInt(Qt.formatTime(new Date(),"ss"))
 
-                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x06,hour,minute,second))
+                    theTcpClient.sendProgram(6,"updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x06,hour,minute,second))
                 }
                 if(isFO8)
                 {
@@ -1865,7 +1953,7 @@ Item {
                     minute = parseInt(Qt.formatTime(new Date(),"mm"))
                     second = parseInt(Qt.formatTime(new Date(),"ss"))
 
-                    theTcpClient.sendProgram("updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x07,hour,minute,second))
+                    theTcpClient.sendProgram(7,"updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x07,hour,minute,second))
                 }
                 loadingDialog.open()
             }
@@ -2021,7 +2109,7 @@ Item {
         {
             if(theTcpClient.isSVOnline)
             {
-                theTcpClient.sendProgram("LightSavingTimer", fountainSerialPackager.setLightSavingTimeForElctricalbox(lightSavingDialogComboBox.currentIndex,lightSavingOnHourComboBox.currentIndex,lightSavingOnMinuteComboBox.currentIndex,lightSavingOffHourComboBox.currentIndex,lightSavingOffMinuteComboBox.currentIndex))
+                theTcpClient.sendProgram(lightSavingDialogComboBox.currentIndex,"LightSavingTimer", fountainSerialPackager.setLightSavingTimeForElctricalbox(lightSavingDialogComboBox.currentIndex,lightSavingOnHourComboBox.currentIndex,lightSavingOnMinuteComboBox.currentIndex,lightSavingOffHourComboBox.currentIndex,lightSavingOffMinuteComboBox.currentIndex))
                 loadingDialog.open()
             }
         }
@@ -2158,7 +2246,7 @@ Item {
         {
             if(theTcpClient.isSVOnline)
             {
-                theTcpClient.sendProgram("motorTimeSaving", fountainSerialPackager.setMotorSavingTimeForElectricalBox(motorTimeSavingDialog.currentIndex, ca1OnHour,ca1OnMinute,ca1OFFHour,ca1FFMinute,ca2OnHour,ca2OnMinute,ca2OFFHour,ca2OFFMinute))
+                theTcpClient.sendProgram(motorTimeSavingDialog.currentIndex,"motorTimeSaving", fountainSerialPackager.setMotorSavingTimeForElectricalBox(motorTimeSavingDialog.currentIndex, ca1OnHour,ca1OnMinute,ca1OFFHour,ca1FFMinute,ca2OnHour,ca2OnMinute,ca2OFFHour,ca2OFFMinute))
                 loadingDialog.open()
             }
         }

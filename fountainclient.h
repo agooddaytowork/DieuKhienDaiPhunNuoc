@@ -50,7 +50,7 @@ public:
 
     Q_INVOKABLE void connect(const QString &ip, const quint16 &port);
     Q_INVOKABLE void connect();
-    Q_INVOKABLE void sendProgram(const QString &programName, const QByteArray &program);
+    Q_INVOKABLE void sendProgram(const quint8 &BOX_ID, const QString &programName, const QByteArray &program);
     Q_INVOKABLE void sendSpeed(const QByteArray &data);
     Q_INVOKABLE void setHostName(const QString &hostName);
     Q_INVOKABLE void setPort(const quint16 &port);
@@ -61,6 +61,8 @@ public:
     Q_INVOKABLE int getCurrentEffect();
     Q_INVOKABLE int getCurrentSpeed();
     Q_INVOKABLE int getCurrentRepeat();
+    Q_INVOKABLE void uploadFileBin(const quint8 &BOX_ID, const QString &fileURL);
+
 
     void updateSecretKeyToFountainDevices(const QString &key);
 

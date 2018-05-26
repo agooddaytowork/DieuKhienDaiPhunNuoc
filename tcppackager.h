@@ -22,7 +22,7 @@ public:
 #endif
     tcpPackager();
     static QString generateClientId();
-    static QByteArray playProgram(const QString &programName, const QByteArray &Program);
+    static QByteArray playProgram(const quint8 &BOX_ID, const QString &programName, const QByteArray &Program);
     static QByteArray playSpeed(const QByteArray &data);
     static QByteArray isFountainOnline();
     static QByteArray fountainResponse(const QByteArray &response);
@@ -37,6 +37,7 @@ public:
     static QByteArray requestToAddNewClient();
     static QByteArray requestToGetPermission();
     static QByteArray aboutToDisconnect();
+    static QByteArray sendBinfile(const quint8 BOX_ID, const QString &fileURL);
     static void setSecretKey(const QByteArray &newKey);
 
 

@@ -1,5 +1,8 @@
 #include "tcppackager.h"
 #include <QDebug>
+#include <QFile>
+#include <QUrl>
+
 tcpPackager::tcpPackager()
 {
 
@@ -24,14 +27,12 @@ QString tcpPackager::generateClientId()
 {
 
     static QString id =  QCryptographicHash::hash("clientId" + QByteArray::number(QDateTime::currentMSecsSinceEpoch()),QCryptographicHash::Sha256);
-
-
     return id;
 
 }
 
 
-QByteArray tcpPackager::playProgram(const QString &programName, const QByteArray &Program)
+QByteArray tcpPackager::playProgram(const quint8 &BOX_ID, const QString &programName, const QByteArray &Program)
 {
     QJsonObject thePackage;
 
@@ -45,6 +46,7 @@ QByteArray tcpPackager::playProgram(const QString &programName, const QByteArray
     thePackage.insert("Command", "playProgram");
     thePackage.insert("ProgramName", programName);
     thePackage.insert("ProgramData", (QString) Program.toHex());
+    thePackage.insert("BOXID",BOX_ID);
 
     QJsonDocument aDocument(thePackage);
     return aDocument.toJson();
@@ -255,4 +257,31 @@ QByteArray tcpPackager::updateSecretKey(const QString &key)
 
     QJsonDocument aDocument(thePackage);
     return aDocument.toJson();
+}
+
+QByteArray tcpPackager::sendBinfile(const quint8 BOX_ID, const QString &fileURL)
+{
+
+    QFile theFile(QUrl(fileURL).toLocalFile());
+    if(!theFile.open(QIODevice::ReadOnly))
+    {
+        return QByteArray();
+    }
+
+    QJsonObject thePackage;
+
+    qint64 theTimeStamp = QDateTime::currentMSecsSinceEpoch();
+    QByteArray time;
+    time.append(QString::number(theTimeStamp));
+    thePackage.insert("ClientId", m_clientId);
+    thePackage.insert("ClientType", m_clientType);
+    thePackage.insert("UUID", (QString) QCryptographicHash::hash(m_scecretKey + time, QCryptographicHash::Sha256));
+    thePackage.insert("TimeStamp",QString::number(theTimeStamp) );
+    thePackage.insert("Command", "playProgram");
+    thePackage.insert("ProgramName", "uploadFileBin");
+    thePackage.insert("ProgramData", (QString) theFile.readAll().toHex());
+    thePackage.insert("BOXID",BOX_ID);
+    QJsonDocument aDocument(thePackage);
+    return aDocument.toJson();
+
 }
