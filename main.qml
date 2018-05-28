@@ -389,21 +389,7 @@ ApplicationWindow {
                         var allFountainsOnline = true;
                         if(theTcpClient.isSVOnline)
                         {
-                            for (var i = 0; i < 8; i++)
-                            {
-                                if (theTcpClient.getFountainStatus(i))
-                                {
-                                    allFountainsOnline = false
-                                    statusDialog.open()
-                                    statusDialog.status = "Tất cả đài phun nước phải online để dùng chức năng này!"
-                                    break
-                                }
-                            }
-                            if(allFountainsOnline)
-                            {
-                                changeSecretKeyDialog.open()
-
-                            }
+                            changeSecretKeyDialog.open()
                         }
                         else
                            {
@@ -411,8 +397,6 @@ ApplicationWindow {
                             statusDialog.open()
                             statusDialog.status = "Chưa kết nối tới đài phun nước!"
                         }
-
-
 
 
                     }
