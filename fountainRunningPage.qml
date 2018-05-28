@@ -799,6 +799,83 @@ Item {
                                                        "operationMode" : 3
                                                    }
                                                ]
+                                           },
+                                           {"box_ID": 8,
+                                               "box_Name": "FO9",
+                                               "online": false,
+                                               "fountains":
+                                                   [
+                                                   {"fO_ID": 10,
+                                                       "fO_Name": "Tất Cả Đài",
+                                                       "program_ID": 0,
+                                                       "repeat":99,
+                                                       "sync": 0,
+                                                       "operationMode" : 3
+                                                   },
+                                                   {"fO_ID": 0,
+                                                       "fO_Name": "Đài 1",
+                                                       "program_ID": 0,
+                                                       "repeat":99,
+                                                       "sync": 0,
+                                                       "operationMode" : 3
+                                                   },
+                                                   {"fO_ID": 1,
+                                                       "fO_Name": "Đài 2",
+                                                       "program_ID": 0,
+                                                       "repeat":99,
+                                                       "sync": 0,
+                                                       "operationMode" : 3
+                                                   },
+                                                   {"fO_ID": 2,
+                                                       "fO_Name": "Đài 3",
+                                                       "program_ID": 0,
+                                                       "repeat":99,
+                                                       "sync": 0,
+                                                       "operationMode" : 3
+                                                   },
+                                                   {"fO_ID": 3,
+                                                       "fO_Name": "Đài 4",
+                                                       "program_ID": 0,
+                                                       "repeat":99,
+                                                       "sync": 0,
+                                                       "operationMode" : 3
+                                                   },
+                                                   {"fO_ID": 4,
+                                                       "fO_Name": "Đài 5",
+                                                       "program_ID": 0,
+                                                       "repeat":99,
+                                                       "sync": 0,
+                                                       "operationMode" : 3
+                                                   },
+                                                   {"fO_ID": 5,
+                                                       "fO_Name": "Đài 6",
+                                                       "program_ID": 0,
+                                                       "repeat":99,
+                                                       "sync": 0,
+                                                       "operationMode" : 3
+                                                   },
+                                                   {"fO_ID": 6,
+                                                       "fO_Name": "Đài 7",
+                                                       "program_ID": 0,
+                                                       "repeat":99,
+                                                       "sync": 0,
+                                                       "operationMode" : 3
+                                                   },
+                                                   {"fO_ID": 7,
+                                                       "fO_Name": "Đài 8",
+                                                       "program_ID": 0,
+                                                       "repeat":99,
+                                                       "sync": 0,
+                                                       "operationMode" : 3
+                                                   },
+                                                   {"fO_ID": 8,
+                                                       "fO_Name": "Đài 9",
+                                                       "program_ID": 0,
+                                                       "repeat":99,
+                                                       "sync": 0,
+                                                       "operationMode" : 3
+                                                   }
+                                               ]
                                            }
                                        ])
     }
@@ -1862,6 +1939,7 @@ Item {
         property bool isFO6 : false
         property bool isFO7 : false
         property bool isFO8 : false
+        property bool isFO9 : false
 
 
         focus: true
@@ -1955,10 +2033,18 @@ Item {
 
                     theTcpClient.sendProgram(7,"updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x07,hour,minute,second))
                 }
+                if(isFO9)
+                {
+                    hour = parseInt(Qt.formatTime(new Date(),"HH"))
+                    minute = parseInt(Qt.formatTime(new Date(),"mm"))
+                    second = parseInt(Qt.formatTime(new Date(),"ss"))
+
+                    theTcpClient.sendProgram(8,"updateRTC", fountainSerialPackager.setRTCTimeForElectricalBox(0x07,hour,minute,second))
+                }
                 loadingDialog.open()
             }
 
-            isFO1 = false; isFO2 =false; isFO3 = false; isFO4 =false; isFO5 = false; isFO6 =false; isFO7 = false; isFO8 = false
+            isFO1 = false; isFO2 =false; isFO3 = false; isFO4 =false; isFO5 = false; isFO6 =false; isFO7 = false; isFO8 = false; isFO9 = false
 
 
 
@@ -2070,6 +2156,10 @@ Item {
                             else if(box_ID == 7)
                             {
                                 updateRTCDialog.isFO8 = updateRTCelectricalBoxDelegate.cellSelected
+                            }
+                            else if(box_ID == 8)
+                            {
+                                updateRTCDialog.isFO9 = updateRTCelectricalBoxDelegate.cellSelected
                             }
 
                         }

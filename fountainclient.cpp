@@ -6,6 +6,7 @@
 #include "fountainserialpackager.h"
 
 #define readInterval 400
+#define numberOfFountain 9
 
 
 
@@ -14,7 +15,7 @@ fountainClient::fountainClient(QObject *parent): QObject(parent), tcpSocket(new 
     in.setDevice(tcpSocket);
     in.setVersion(QDataStream::Qt_5_8);
 
-    for (int i = 0; i < 8;i++)
+    for (int i = 0; i < numberOfFountain;i++)
     {
         m_fountainStatusHash.insert(i, false);
     }
@@ -49,7 +50,7 @@ fountainClient::fountainClient(QObject *parent): QObject(parent), tcpSocket(new 
         setIsSVOnline(false);
         m_Timer->stop();
         emit serverOffline();
-        for (int i = 0; i < 8;i++)
+        for (int i = 0; i < numberOfFountain;i++)
         {
             m_fountainStatusHash.insert(i, false);
         }
