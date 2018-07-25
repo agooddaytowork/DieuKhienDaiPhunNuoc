@@ -56,7 +56,7 @@ Item {
             errorTimer.stop()
             successDialog.status = "Cập nhật thành công!"
             successDialog.open()
-//            contronProgramComboBox.currentIndex = theTcpClient.getCurrentProgram()
+            //            contronProgramComboBox.currentIndex = theTcpClient.getCurrentProgram()
             effectComboBox.currentIndex = theTcpClient.getCurrentEffect()
             speedComboBox.currentIndex = theTcpClient.getCurrentSpeed()
             fountainSpeedControlRepeatComboBox.currentIndex = theTcpClient.getCurrentRepeat()
@@ -800,8 +800,85 @@ Item {
                                                    }
                                                ]
                                            },
-                                           {"box_ID": 8,
-                                               "box_Name": "FO9",
+//                                           {"box_ID": 8,
+//                                               "box_Name": "FO9",
+//                                               "online": false,
+//                                               "fountains":
+//                                                   [
+//                                                   {"fO_ID": 10,
+//                                                       "fO_Name": "Tất Cả Đài",
+//                                                       "program_ID": 0,
+//                                                       "repeat":99,
+//                                                       "sync": 0,
+//                                                       "operationMode" : 3
+//                                                   },
+//                                                   {"fO_ID": 0,
+//                                                       "fO_Name": "Đài 1",
+//                                                       "program_ID": 0,
+//                                                       "repeat":99,
+//                                                       "sync": 0,
+//                                                       "operationMode" : 3
+//                                                   },
+//                                                   {"fO_ID": 1,
+//                                                       "fO_Name": "Đài 2",
+//                                                       "program_ID": 0,
+//                                                       "repeat":99,
+//                                                       "sync": 0,
+//                                                       "operationMode" : 3
+//                                                   },
+//                                                   {"fO_ID": 2,
+//                                                       "fO_Name": "Đài 3",
+//                                                       "program_ID": 0,
+//                                                       "repeat":99,
+//                                                       "sync": 0,
+//                                                       "operationMode" : 3
+//                                                   },
+//                                                   {"fO_ID": 3,
+//                                                       "fO_Name": "Đài 4",
+//                                                       "program_ID": 0,
+//                                                       "repeat":99,
+//                                                       "sync": 0,
+//                                                       "operationMode" : 3
+//                                                   },
+//                                                   {"fO_ID": 4,
+//                                                       "fO_Name": "Đài 5",
+//                                                       "program_ID": 0,
+//                                                       "repeat":99,
+//                                                       "sync": 0,
+//                                                       "operationMode" : 3
+//                                                   },
+//                                                   {"fO_ID": 5,
+//                                                       "fO_Name": "Đài 6",
+//                                                       "program_ID": 0,
+//                                                       "repeat":99,
+//                                                       "sync": 0,
+//                                                       "operationMode" : 3
+//                                                   },
+//                                                   {"fO_ID": 6,
+//                                                       "fO_Name": "Đài 7",
+//                                                       "program_ID": 0,
+//                                                       "repeat":99,
+//                                                       "sync": 0,
+//                                                       "operationMode" : 3
+//                                                   },
+//                                                   {"fO_ID": 7,
+//                                                       "fO_Name": "Đài 8",
+//                                                       "program_ID": 0,
+//                                                       "repeat":99,
+//                                                       "sync": 0,
+//                                                       "operationMode" : 3
+//                                                   },
+//                                                   {"fO_ID": 8,
+//                                                       "fO_Name": "Đài 9",
+//                                                       "program_ID": 0,
+//                                                       "repeat":99,
+//                                                       "sync": 0,
+//                                                       "operationMode" : 3
+//                                                   }
+//                                               ]
+//                                           },
+                                           {"box_ID": 9,
+                                               "box_Name": "Tủ FO1->FO7",
                                                "online": false,
                                                "fountains":
                                                    [
@@ -940,7 +1017,29 @@ Item {
                     width: electricalBoxGridView.cellWidth
                     height: electricalBoxGridView.cellHeight
                     property int cellIndex: index
-                    enabled: online
+                    visible:{
+
+                        if(box_ID == 8)
+                        {
+                            false
+                        }
+                        else
+                        {
+                            true
+                        }
+                    }
+
+                    enabled:
+                    {
+                        if(box_ID == 9)
+                        {
+                            true
+                        }
+                        else
+                        {
+                            online
+                        }
+                    }
 
                     Text {
                         id: electricalBoxText
@@ -1164,7 +1263,7 @@ Item {
             }
             else if(root.operatingMode == 2)
             {
-               "Điều khiển hiệu ứng: " + titleString
+                "Điều khiển hiệu ứng: " + titleString
             }
             else if(root.operatingMode == 0)
             {
@@ -1239,7 +1338,7 @@ Item {
                 }
             }
 
-           loadingDialog.open()
+            loadingDialog.open()
         }
 
         onRejected:
@@ -1444,7 +1543,6 @@ Item {
 
             var Box_ID = electricalBoxGridView.electricalBoxCellCurrentIndex
             var FO_ID = fountainBoxGridView.fountainBoxCellCurrentIndex
-
             if(FO_ID === 0x00)
             {
                 FO_ID = 10
@@ -1455,23 +1553,47 @@ Item {
             }
 
 
-            if(theTcpClient.isSVOnline)
+
+
+
+            if(Box_ID !== 8)
             {
+                if(theTcpClient.isSVOnline)
+                {
 
 
-                theTcpClient.sendProgram(Box_ID,"controlFountain", fountainSerialPackager.runProgramOnFountainDirectly(Box_ID,FO_ID,programComboBox.currentIndex,repeatCombobox.currentIndex))
+
+                    theTcpClient.sendProgram(Box_ID,"controlFountain", fountainSerialPackager.runProgramOnFountainDirectly(Box_ID,FO_ID,programComboBox.currentIndex,repeatCombobox.currentIndex))
 
 
-                loadingDialog.open()
+                    loadingDialog.open()
+                }
+                else
+                {
+
+                    // SV is not online, open dialog here
+                }
+
+                fountainprogram_IDModel.get(Box_ID).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"program_ID", programComboBox.currentIndex)
+                fountainprogram_IDModel.get(Box_ID).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"repeat", repeatCombobox.currentIndex)
             }
             else
             {
 
-                // SV is not online, open dialog here
+                // if Box ID = 9 -> control FO1->FO7
+                if(theTcpClient.isSVOnline)
+                {
+
+                    for(var i = 0; i < 7; i++)
+                    {
+                         theTcpClient.sendProgram(i,"controlFountain", fountainSerialPackager.runProgramOnFountainDirectly(i,FO_ID,programComboBox.currentIndex,repeatCombobox.currentIndex))
+                    }
+
+                    loadingDialog.open()
+                }
             }
 
-            fountainprogram_IDModel.get(Box_ID).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"program_ID", programComboBox.currentIndex)
-            fountainprogram_IDModel.get(Box_ID).fountains.setProperty(fountainBoxGridView.fountainBoxCellCurrentIndex,"repeat", repeatCombobox.currentIndex)
+
         }
         onRejected:
         {
@@ -1623,44 +1745,44 @@ Item {
 
         Column
         {
-                spacing: 10
-                width: 500
+            spacing: 10
+            width: 500
 
-                ComboBox
+            ComboBox
+            {
+                id: uploadFileBinDialogComboBox
+                model: 0
+                textRole: "box_Name"
+                width: 400
+
+                onCurrentIndexChanged:
                 {
-                    id: uploadFileBinDialogComboBox
-                    model: 0
-                    textRole: "box_Name"
-                    width: 400
 
-                    onCurrentIndexChanged:
-                    {
-
-                    }
                 }
+            }
 
-                Button
+            Button
+            {
+                text: "Chọn file"
+
+                onPressed: {
+                    chooseFileBinDialog.open()
+                }
+            }
+            Label{
+                id: binFileLabel
+                text: ""
+            }
+
+            MyFileDialog
+            {
+                id: chooseFileBinDialog
+
+                onFileURLChanged:
                 {
-                    text: "Chọn file"
-
-                    onPressed: {
-                        chooseFileBinDialog.open()
-                    }
+                    binFileLabel.text = fileURL
                 }
-                Label{
-                    id: binFileLabel
-                    text: ""
-                }
-
-                MyFileDialog
-                {
-                    id: chooseFileBinDialog
-
-                    onFileURLChanged:
-                    {
-                        binFileLabel.text = fileURL
-                    }
-                }
+            }
         }
 
 

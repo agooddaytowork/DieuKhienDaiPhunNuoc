@@ -89,10 +89,10 @@ ApplicationWindow {
 
                 onClicked: optionsMenu.open()
 
-                onPressAndHold:
-                {
-                    changeSecretKeyDialog.open()
-                }
+                //                onPressAndHold:
+                //                {
+                //                    changeSecretKeyDialog.open()
+                //                }
 
                 Menu {
                     id: optionsMenu
@@ -165,17 +165,17 @@ ApplicationWindow {
                         }
                     }
 
-                    MenuItem {
-                        text: "Tải file bin tới đài phun nước"
-                        font.pixelSize: 16
-                        onTriggered:{
+                    //                    MenuItem {
+                    //                        text: "Tải file bin tới đài phun nước"
+                    //                        font.pixelSize: 16
+                    //                        onTriggered:{
 
-                        stackView.currentItem.openUploadFileBinDialog()
+                    //                        stackView.currentItem.openUploadFileBinDialog()
 
-                        }
+                    //                        }
 
 
-                    }
+                    //                    }
                     //                    MenuItem {
                     //                        text: "Cập nhật mật khẩu"
                     //                        font.pixelSize: 16
@@ -255,7 +255,7 @@ ApplicationWindow {
                 {
                     id: fountainStatusIconMouseArea
                     anchors.fill: parent
-                    pressAndHoldInterval: 3000
+                    pressAndHoldInterval: 10000
                     onPressAndHold: {
                         setAdvanceControlModeDialog.open()
                     }
@@ -377,7 +377,8 @@ ApplicationWindow {
                     source: "images/key.png"
                     scale: 0.6
                 }
-                visible: appSetting.advanceMode
+                //                visible: appSetting.advanceMode
+                visible: false
 
                 MouseArea
                 {
@@ -392,13 +393,11 @@ ApplicationWindow {
                             changeSecretKeyDialog.open()
                         }
                         else
-                           {
+                        {
 
                             statusDialog.open()
                             statusDialog.status = "Chưa kết nối tới đài phun nước!"
                         }
-
-
                     }
                 }
             }
@@ -474,15 +473,13 @@ ApplicationWindow {
         title: "Kết nối tới đài phun nước"
         footer: DialogButtonBox{
 
+
+
             Button {
                 text: qsTr("Hủy")
                 DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
             }
-            Button {
-                text: qsTr("Kết nối")
-                DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
-                visible: theTcpClient.isSVOnline? false: true
-            }
+
 
         }
 
@@ -508,6 +505,85 @@ ApplicationWindow {
             spacing: 20
             anchors.fill: parent
 
+            Frame{
+
+                visible:  theTcpClient.isSVOnline? false: true
+
+                Layout.alignment: Qt.AlignHCenter
+
+                height: 150
+                width: 350
+                ColumnLayout
+                {
+                    anchors.fill: parent
+                    Label {
+
+                        text: qsTr("Kết nối qua Wifi: ")
+                        visible:  theTcpClient.isSVOnline? false: true
+                    }
+                    TextField{
+                        id: domainTextField
+                        text: appSetting.hostAddress
+                        visible:  theTcpClient.isSVOnline? false: true
+
+                    }
+
+                    Button {
+                        text: qsTr("Kết nối")
+                        Layout.alignment: Qt.AlignHCenter
+                        DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+                        visible: theTcpClient.isSVOnline? false: true
+
+                        onPressed:
+                        {
+                            if(!theTcpClient.isSVOnline)
+                            {
+                                appSetting.hostAddress = domainTextField.text
+                                theTcpClient.connect(appSetting.hostAddress,8080)
+                                svAddresDialog.close()
+
+
+                            }
+                        }
+
+                    }
+
+                }
+
+            }
+
+
+            Frame{
+
+
+                Layout.alignment: Qt.AlignHCenter
+
+                height: 150
+                width: 350
+                visible:  theTcpClient.isSVOnline? false: true
+                ColumnLayout{
+                    anchors.fill: parent
+                    Label {
+
+                        text: qsTr("Kết nối qua Internet: ")
+                        visible:  theTcpClient.isSVOnline? false: true
+                    }
+                    Button{
+                        id: connectToInternetServerButton
+                        Layout.alignment: Qt.AlignHCenter
+                        text: "Kết nối"
+                        visible:  theTcpClient.isSVOnline? false: true
+                        onPressed: {
+                            if(!theTcpClient.isSVOnline)
+                            {
+                                theTcpClient.connect("thanhduc66.com",8080)
+                                svAddresDialog.close()
+                            }
+                        }
+                    }
+
+                }
+            }
 
             Button{
                 id: disconnectToServerButton
@@ -522,26 +598,11 @@ ApplicationWindow {
                 }
 
             }
-            //            TextField {
-            //                id: svAddressDialogTextField
-            //                visible: !theTcpClient.isSVOnline
-            //                focus: true
-            //                placeholderText:"Địa chỉ..."
-            //                Layout.fillWidth: true
-            //                text: appSetting.hostAddress
-            //            }
-
         }
 
         onAccepted:
         {
-            if(!theTcpClient.isSVOnline)
-            {
-                appSetting.hostAddress = "thanhduc66.com"
-                //                theTcpClient.connect(svAddressDialogTextField.text, 8080)
 
-                theTcpClient.connect("thanhduc66.com",8080)
-            }
 
         }
         onDiscarded:

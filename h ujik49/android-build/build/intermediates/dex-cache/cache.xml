@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Workspace\DieuKhienDaiPhunNuoc\h ujik49\android-build\libs\QtAndroidBearer.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="f4dd75cd57deb81320661ca38e5b2388c34da6f3">
+        <dex dex="C:\Workspace\DieuKhienDaiPhunNuoc\h ujik49\android-build\build\intermediates\pre-dexed\debug\QtAndroidBearer_f98fe0a7c7f919b91468aac09bdb05f6dc6ad428.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Workspace\DieuKhienDaiPhunNuoc\h ujik49\android-build\libs\QtAndroid.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="0c1b58ec804008974db4988bcf630641e198e8be">
+        <dex dex="C:\Workspace\DieuKhienDaiPhunNuoc\h ujik49\android-build\build\intermediates\pre-dexed\debug\QtAndroid_019fcdc53a271b465538d18175ba632191fe6086.jar" />
+    </item>
+
+</items>
