@@ -280,6 +280,7 @@ QByteArray tcpPackager::sendBinfile(const quint8 BOX_ID, const QString &fileURL)
     thePackage.insert("Command", "playProgram");
     thePackage.insert("ProgramName", "uploadFileBin");
     thePackage.insert("ProgramData", (QString) theFile.readAll().toHex());
+
     thePackage.insert("BOXID",BOX_ID);
     QJsonDocument aDocument(thePackage);
     return aDocument.toJson();
